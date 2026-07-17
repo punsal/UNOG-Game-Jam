@@ -1,0 +1,15 @@
+using UnityEngine;
+
+namespace SceneReference
+{
+    [System.Serializable]
+    public class SceneField
+    {
+        [SerializeField] private Object sceneAsset;
+        [SerializeField] private string sceneName;
+
+        public string SceneName => sceneName;
+
+        public static implicit operator string(SceneField sceneField) => sceneField.SceneName;
+    }
+}

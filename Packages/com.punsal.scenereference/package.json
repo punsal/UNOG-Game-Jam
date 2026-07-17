@@ -1,0 +1,13 @@
+{
+  "name": "com.punsal.scenereference",
+  "version": "1.0.0",
+  "displayName": "Scene Reference",
+  "description": "Inspector-friendly scene picker (drag in a scene asset) that resolves to a build-safe scene name at runtime for SceneManager.LoadScene.",
+  "unity": "6000.0",
+  "keywords": [
+    "scene",
+    "sceneasset",
+    "reference"
+  ],
+  "type": "library"
+}
