@@ -40,6 +40,7 @@ public class StartScreen : MonoBehaviour
         dragHint.SetActive(true);
         hasMoved = false;
         inputReader.SetInputEnabled(true);
+        GameAudio.Instance?.PlayLastLightPing();
         runController.Restart();
     }
 

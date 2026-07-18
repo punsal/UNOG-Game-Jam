@@ -45,6 +45,7 @@ public class OutcomeScreen : MonoBehaviour, IResettable
     private void HandleRetry()
     {
         Hide();
+        GameAudio.Instance?.RestartRun();
         runController.Restart();
     }
 
