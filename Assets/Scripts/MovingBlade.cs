@@ -6,12 +6,12 @@ public class MovingBlade : MonoBehaviour, IResettable
     [SerializeField] private float speed = 2f;
     [SerializeField] private float phase = 0f;
 
-    private Vector3 startPosition;
+    private Vector3 startingLocalPosition;
     private float elapsed;
 
     private void Awake()
     {
-        startPosition = transform.position;
+        startingLocalPosition = transform.localPosition;
     }
 
     private void Update()
@@ -29,9 +29,9 @@ public class MovingBlade : MonoBehaviour, IResettable
 
     private void ApplyOscillation(float time)
     {
-        var position = startPosition;
+        var position = startingLocalPosition;
         position.x += amplitude * Mathf.Sin(speed * time + phase);
-        transform.position = position;
+        transform.localPosition = position;
     }
 
     public void ResetRun()
