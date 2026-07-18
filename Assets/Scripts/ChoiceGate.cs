@@ -7,6 +7,11 @@ public class ChoiceGate : MonoBehaviour, IResettable
     [SerializeField] private AltarTrigger altarB;
 
     public event Action<CostData> CostChosen;
+    // Presentation-only: which altar was committed to (fires alongside CostChosen).
+    public event Action<AltarTrigger> AltarChosen;
+
+    public AltarTrigger AltarA => altarA;
+    public AltarTrigger AltarB => altarB;
 
     private bool hasChosen;
 
@@ -32,6 +37,7 @@ private void OnDisable()
         hasChosen = true;
         SetAltarsInteractable(false);
         CostChosen?.Invoke(altar.Offer);
+        AltarChosen?.Invoke(altar);
     }
 
     private void SetAltarsInteractable(bool interactable)
