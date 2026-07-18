@@ -1,76 +1,35 @@
-# Last Light - DECISIONS
+# Last Light - DECISIONS v2
 
-These decisions protect the MVP. Claude Code should treat locked decisions as constraints, not suggestions.
+## Locked Product Decisions
 
-## Product decisions
+- Portrait Unity 2D auto-runner.
+- One-finger horizontal drag control.
+- Six fixed stages.
+- Target run length: 3-5 minutes.
+- Health and relic light are separate resources.
+- Two physical offers appear at the end of a stage.
+- Entering an altar commits exactly one choice; there is no confirmation button.
+- Permanent costs use bounded modifiers.
+- MVP hazards are spike wall and moving blade.
+- Two endings are required; a third is conditional.
+- Android is the default build unless jam rules require WebGL.
+- Feature freeze begins at Hour 38.
 
-### Scope rule
+## Approved Technical Baseline
 
-- **Status:** Accepted
-- **Decision:** No feature is added unless another feature is removed.
+The development architecture spreadsheet is approved. Its one-scene, fixed-prefab, immutable-config, mutable-RunState, centralized-reset approach is the implementation baseline. Technical substitutions are permitted only when they preserve the locked product behavior and do not expand scope.
 
-### Primary build
+## Approved Art Baseline
 
-- **Status:** Pending
-- **Decision:** Android by default; switch to WebGL only if jam rules require it.
+The art production spreadsheet is approved. G1-G3 remain placeholder-driven. P0 art is integrated after G3 with an initial four-hour timebox. Every P0 item must retain a usable fallback. P1/P2 remain optional.
 
-### Language
-
-- **Status:** Accepted
-- **Decision:** Use icon-heavy short English copy.
-
-### Ending count
-
-- **Status:** Pending
-- **Decision:** Three target, two minimum; decide after G3.
-
-### Core loop
-
-- **Status:** Locked
-- **Decision:** Auto-run, horizontal one-finger movement, damage avoidance, end-stage choice, permanent sacrifice.
-
-### Resources
-
-- **Status:** Locked
-- **Decision:** Health and relic light are separate resources.
-
-### Run structure
-
-- **Status:** Locked
-- **Decision:** Six short fixed stages, total run length 3-5 minutes.
-
-### Feature freeze
-
-- **Status:** Locked
-- **Decision:** Begins at Hour 38. Only blocker, build and readability fixes after that point.
-
-## Active risks
-
-### R-01 - Scope growth
-
-- **Likelihood:** High
-- **Impact:** High
-- **Response:** Move new ideas to Parking Lot unless they replace existing scope.
-
-### R-02 - Mobile input feel
-
-- **Likelihood:** Medium
-- **Impact:** High
-- **Response:** Run early real-device test and tune smoothing.
-
-### R-03 - Impossible cost combinations
-
-- **Likelihood:** Medium
-- **Impact:** High
-- **Response:** Cap modifiers and test minimum speed with maximum body size.
-
-## Explicitly out of scope
+## Explicit Non-Goals
 
 - Combat
 - Procedural generation
-- Inventory systems
+- Inventory
 - Dialogue trees
-- Multiple character classes
+- Character classes
 - Online features
 - Complex meta-progression
 - Any feature that delays the critical path

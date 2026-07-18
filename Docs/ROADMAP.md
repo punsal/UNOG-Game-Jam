@@ -1,79 +1,44 @@
-# Last Light - ROADMAP
+# Last Light - ROADMAP v2
 
-## 48-hour delivery plan
+## Product Goal
 
-### Hours 0-8: Core playable
+Ship a stable portrait mobile auto-runner in 48 hours. A complete run lasts 3-5 minutes, contains six fixed stages, and forces the player to choose permanent costs while preserving a separate relic-light resource.
 
-- **Tasks:** LL-001 to LL-007
-- **Allowed work:** Control, survival, two obstacles
-- **Cut trigger:** No polish before restart is stable
+## Gates
 
-### Hours 8-16: Theme vertical slice
+### G1 - Core playable (Hour 8)
+Character moves, takes damage, dies, and restarts. Restart must be stable before proceeding.
 
-- **Tasks:** LL-008 to LL-012
-- **Allowed work:** Stage flow, choice, first costs, light
-- **Cut trigger:** Use placeholder UI and art
+### G2 - Theme playable (Hour 16)
+Two physical choices exist and one permanent cost is felt in the next stage.
 
-### Hours 16-28: End-to-end run
+### G3 - End-to-end (Hour 28)
+The player completes six stages and reaches an ending. All art may still be placeholder.
 
-- **Tasks:** LL-013 to LL-017
-- **Allowed work:** Six stages, ending, essential UX
-- **Cut trigger:** Cut third obstacle and variation
+### G4 - Mobile usable (Hour 32)
+Input, safe area, and performance pass on a real Android device.
 
-### Hours 28-38: Mobile, content and playtest
+### G5 - Content complete (Hour 38)
+Two hazards, four costs or risks, two endings, essential UI, fairness testing, and the minimum integrated presentation are complete.
 
-- **Tasks:** LL-018 to LL-022
-- **Allowed work:** Device fixes, fairness, minimum art/audio
-- **Cut trigger:** Cut music layers and extra endings
+### G6 - Submission ready (Hour 48)
+No blockers remain. Final build, controls, description, screenshots, and submission page are smoke-tested.
 
-### Hours 38-48: Feature freeze
+## Art Integration Window
 
-- **Tasks:** LL-023 to LL-024
-- **Allowed work:** Blocker, build and readability fixes only
-- **Cut trigger:** No new systems
+P0 art begins after G3 and only when G4 is protected. The initial integration window is four hours. Priority order:
 
-## Milestone gates
+1. Traveller
+2. Relic
+3. Spike
+4. Blade
+5. Altars
+6. Cost icons
+7. HUD
+8. Corridor micro-kit
 
-### G1 - Core playable (target Hour 8)
+At the timebox, incomplete packages switch to their documented fallbacks. Environment art is the first cut.
 
-- **Pass condition:** Character moves, takes damage, dies and restarts.
-- **PM rule:** Proceed only when restart is stable.
+## Feature Freeze
 
-### G2 - Theme playable (target Hour 16)
-
-- **Pass condition:** Two decisions exist and one permanent cost is felt in the next stage.
-- **PM rule:** Vertical slice must validate the theme.
-
-### G3 - End-to-end (target Hour 28)
-
-- **Pass condition:** Six stages complete from opening to ending.
-- **PM rule:** Cut optional systems if this gate slips.
-
-### G4 - Mobile usable (target Hour 32)
-
-- **Pass condition:** Input, safe area and performance pass on a real device.
-- **PM rule:** Blocking mobile gate.
-
-### G5 - Content complete (target Hour 38)
-
-- **Pass condition:** Two obstacles, four costs/risks, two endings and essential UI are complete.
-- **PM rule:** Start feature freeze after this gate.
-
-### G6 - Submission ready (target Hour 48)
-
-- **Pass condition:** No blockers; build, description, screenshots and controls are ready.
-- **PM rule:** Ship stable over ambitious.
-
-## Critical path
-
-1. Player Controller
-2. Health / Damage / Restart
-3. Obstacle Framework
-4. Level Flow
-5. Choice Gate
-6. Cost Application
-7. Relic Light
-8. Ending Resolver
-9. UI
-10. Polish
-11. QA
+Feature freeze starts at Hour 38. P1/P2 art, the shadow hazard, music, additional endings, extra props, and extra animation are prohibited after this point.
