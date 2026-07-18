@@ -5195,7 +5195,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -7301,7 +7301,7 @@ SceneRoots:
   - {fileID: 2142782803}
   - {fileID: 1752994444}
   - {fileID: 1272703863}
-  - {fileID: 175095952}
   - {fileID: 1375267470}
+  - {fileID: 175095952}
   - {fileID: 741370382}
   - {fileID: 1888564326}
