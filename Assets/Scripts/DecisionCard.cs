@@ -1,9 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class DecisionCard : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer iconRenderer;
-    [SerializeField] private TextMesh copyText;
+    [SerializeField] private TextMeshPro copyText;
 
     public void SetOffer(CostData offer)
     {

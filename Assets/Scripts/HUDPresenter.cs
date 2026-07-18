@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,9 +7,9 @@ public class HUDPresenter : MonoBehaviour
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private RelicLight relicLight;
     [SerializeField] private StageDirector stageDirector;
-    [SerializeField] private Text healthText;
-    [SerializeField] private Text stageText;
-    [SerializeField] private Text lightText;
+    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI stageText;
+    [SerializeField] private TextMeshProUGUI lightText;
 
     private void OnEnable()
     {

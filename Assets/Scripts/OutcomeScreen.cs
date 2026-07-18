@@ -1,10 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class OutcomeScreen : MonoBehaviour, IResettable
 {
     [SerializeField] private GameObject panelRoot;
-    [SerializeField] private Text endingText;
+    [SerializeField] private TextMeshProUGUI endingText;
     [SerializeField] private Button retryButton;
     [SerializeField] private EndingResolver endingResolver;
     [SerializeField] private RunController runController;
