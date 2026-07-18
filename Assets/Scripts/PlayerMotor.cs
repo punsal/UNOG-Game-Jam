@@ -5,10 +5,14 @@ public class PlayerMotor : MonoBehaviour, IResettable
 {
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float halfWidth = 3.5f;
+    // Idle gap after which the next drag input counts as a new swipe gesture.
+    [SerializeField] private float swipeRetriggerGap = 0.25f;
 
     private InputReader inputReader;
     private Vector3 startPosition;
     private float speedMultiplier = 1f;
+    private float lastInputTime = float.NegativeInfinity;
+    private float lastInputSign;
 
     private void Awake()
     {
@@ -28,6 +32,15 @@ public class PlayerMotor : MonoBehaviour, IResettable
 
     public void SetInput(float normalizedX)
     {
+        // Swipe sound per gesture: new drag after a pause, or a direction change.
+        float sign = Mathf.Sign(normalizedX);
+        if (Time.unscaledTime - lastInputTime > swipeRetriggerGap || sign != lastInputSign)
+        {
+            GameAudio.Instance?.PlayMoveSwipe();
+        }
+        lastInputTime = Time.unscaledTime;
+        lastInputSign = sign;
+
         float worldDelta = normalizedX * moveSpeed * speedMultiplier;
         float limit = MovementHalfWidth();
         Vector3 position = transform.position;

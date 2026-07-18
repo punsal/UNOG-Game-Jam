@@ -47,6 +47,7 @@ public class PlayerHealth : MonoBehaviour, IResettable
 
         currentHealth = Mathf.Max(0, currentHealth - amount);
         invulnerabilityTimer = invulnerabilityDuration;
+        GameAudio.Instance?.PlayDamage();
         HealthChanged?.Invoke(currentHealth);
 
         Vector2 hitDirection = (Vector2)transform.position - sourceWorldPosition;
