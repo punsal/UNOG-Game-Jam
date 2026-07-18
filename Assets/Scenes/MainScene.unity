@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 1038781850}
   - component: {fileID: 1038781852}
   - component: {fileID: 1038781851}
+  - component: {fileID: 1038781853}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -330,6 +331,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1038781853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038781845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea8a0891666744a3a3460eb31707a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RelicLight
+  startLight: 100
 --- !u!1 &1411094868
 GameObject:
   m_ObjectHideFlags: 0
