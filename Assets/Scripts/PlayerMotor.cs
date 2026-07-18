@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(InputReader))]
-public class PlayerMotor : MonoBehaviour
+public class PlayerMotor : MonoBehaviour, IResettable
 {
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float halfWidth = 3.5f;
@@ -39,7 +39,7 @@ public class PlayerMotor : MonoBehaviour
         speedMultiplier = multiplier;
     }
 
-    public void ResetMotor()
+public void ResetRun()
     {
         speedMultiplier = 1f;
         transform.position = startPosition;

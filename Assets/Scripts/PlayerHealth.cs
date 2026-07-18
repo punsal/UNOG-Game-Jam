@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IResettable
 {
     public event Action<int> HealthChanged;
     public event Action Died;
@@ -46,7 +46,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void ResetHealth()
+public void ResetRun()
     {
         currentHealth = maxHealth;
         invulnerabilityTimer = 0f;
