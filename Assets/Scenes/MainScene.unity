@@ -2299,6 +2299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMotor
   moveSpeed: 6
   halfWidth: 3.5
+  swipeRetriggerGap: 0.25
 --- !u!114 &741370390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6146,6 +6147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RunController
   player: {fileID: 741370383}
   stageDirector: {fileID: 2142782806}
+  deathRestartDelay: 0.45
 --- !u!4 &2142782803
 Transform:
   m_ObjectHideFlags: 0
