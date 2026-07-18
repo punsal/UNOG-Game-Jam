@@ -2,10 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.U2D;
 
-// Width-locks the ortho camera so the full corridor (walls at +/-4) is always
-// visible regardless of device aspect. The serialized ortho size (5) and the
-// PixelPerfectCamera ref resolution (288x512) both disagree with the level's
-// authored width, which let the player and altars leave the screen.
+/// <summary>Keeps the orthographic camera fitted to the corridor width.</summary>
 public static class CameraFitter
 {
     // Walls sit at +/-4, half a unit of slack keeps their outer edge on screen.

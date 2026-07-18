@@ -1,5 +1,6 @@
 using UnityEngine;
 
+/// <summary>Moves a blade horizontally with a sine wave.</summary>
 public class MovingBlade : MonoBehaviour, IResettable
 {
     [SerializeField] private float amplitude = 2f;

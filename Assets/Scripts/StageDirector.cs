@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+/// <summary>Moves stages through the play area in sequence.</summary>
 public class StageDirector : MonoBehaviour, IResettable
 {
     [SerializeField] private Transform[] stages;
@@ -28,12 +29,19 @@ public class StageDirector : MonoBehaviour, IResettable
 
     public void StartStage(int index)
     {
+        if (index < 0 || index >= stages.Length)
+        {
+            Debug.LogError($"Cannot start stage index {index}; configured count is {stages.Length}.", this);
+            return;
+        }
+
         currentIndex = index;
         var stage = stages[index];
         var basePos = basePositions[index];
         stage.position = new Vector3(basePos.x, spawnY, basePos.z);
         stage.gameObject.SetActive(true);
         scrolling = true;
+        Debug.Log($"Stage {index + 1}/{stages.Length} started.", this);
         StageChanged?.Invoke(index);
     }
 
@@ -61,6 +69,7 @@ public class StageDirector : MonoBehaviour, IResettable
 
     public void CompleteCurrentStage()
     {
+        Debug.Log($"Stage {currentIndex + 1}/{stages.Length} completed.", this);
         scrolling = false;
         stages[currentIndex].gameObject.SetActive(false);
 

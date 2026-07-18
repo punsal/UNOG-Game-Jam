@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using SceneReference;
 
+/// <summary>Loads the configured game scene after bootstrap initialization.</summary>
 public class Boot : MonoBehaviour
 {
     [SerializeField] private SceneField sceneToLoad;
@@ -19,7 +20,8 @@ public class Boot : MonoBehaviour
     }
 
     private void LoadScene()
-    { 
+    {
+        Debug.Log($"Loading scene '{sceneToLoad}'.", this);
         SceneManager.LoadScene(sceneToLoad);
     }
 }

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
+/// <summary>Reports when the player enters an altar and exposes its offer.</summary>
 public class AltarTrigger : MonoBehaviour
 {
     [SerializeField] private CostData offer;

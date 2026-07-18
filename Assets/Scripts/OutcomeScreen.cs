@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>Shows the run ending and handles retry requests.</summary>
 public class OutcomeScreen : MonoBehaviour, IResettable
 {
     [SerializeField] private GameObject panelRoot;
@@ -33,6 +34,7 @@ public class OutcomeScreen : MonoBehaviour, IResettable
 
     public void Show(EndingType ending)
     {
+        Debug.Log($"Showing {ending} outcome screen.", this);
         endingText.text = ending == EndingType.Dark ? "Consumed by Darkness" : "The Light Endures";
         panelRoot.SetActive(true);
     }

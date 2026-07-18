@@ -6,10 +6,7 @@ public enum HazardType { Spike, Wall, Shadow }
 public enum SacrificeType { Light, Body, Senses }
 public enum EndingQuality { Good, Bad }
 
-// Persistent, event-driven audio hub. Gameplay scripts call these public methods
-// only - no other script should touch an AudioSource directly.
-// Stems are 8s loops started on a shared DSP timestamp so they stay sample-aligned;
-// sacrificed stems keep looping at volume 0 so the mix never drifts out of sync.
+/// <summary>Coordinates persistent music stems and gameplay sound effects.</summary>
 public class GameAudio : MonoBehaviour
 {
     public static GameAudio Instance { get; private set; }
@@ -127,6 +124,7 @@ public class GameAudio : MonoBehaviour
         // path in the same frame) into a single schedule.
         if (Time.frameCount == lastStartFrame) return;
         lastStartFrame = Time.frameCount;
+        Debug.Log("Audio mix started for a new run.", this);
 
         deathTriggered = false;
         lowLightWarned = false;
@@ -165,6 +163,7 @@ public class GameAudio : MonoBehaviour
     {
         if (deathTriggered) return;
         deathTriggered = true;
+        Debug.Log("Playing death audio.", this);
 
         FadeAllStems(0f, deathFadeTime, stopWhenSilent: true);
         PlaySfx(deathClip);
@@ -172,6 +171,7 @@ public class GameAudio : MonoBehaviour
 
     public void PlayEnding(EndingQuality endingQuality)
     {
+        Debug.Log($"Playing {endingQuality} ending audio.", this);
         FadeAllStems(0f, endingFadeTime, stopWhenSilent: true);
         PlaySfx(endingQuality == EndingQuality.Good ? finalGoodClip : finalBadClip);
     }
@@ -191,6 +191,7 @@ public class GameAudio : MonoBehaviour
         int index = (int)sacrificeType;
         if (sacrificed[index]) return; // Permanent for this run; never replay/refade.
         sacrificed[index] = true;
+        Debug.Log($"Muted {sacrificeType} music stem.", this);
 
         PlaySfx(payCostClip);
         if (sacrificeType == SacrificeType.Light) PlaySfx(lightLossClip);
@@ -201,6 +202,7 @@ public class GameAudio : MonoBehaviour
 
     public void ChooseRisk()
     {
+        Debug.Log("Raised danger music stem.", this);
         PlaySfx(acceptRiskClip);
         FadeStem(DangerIndex, 1f, riskFadeTime);
     }

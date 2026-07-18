@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>Coordinates player death and run resets.</summary>
 public class RunController : MonoBehaviour
 {
     [SerializeField] private GameObject player;
@@ -39,6 +40,7 @@ public class RunController : MonoBehaviour
             return;
         }
 
+        Debug.Log($"Restarting after death in {deathRestartDelay:0.##} seconds.", this);
         GameAudio.Instance?.PlayDeath();
         if (inputReader != null)
         {
@@ -74,5 +76,6 @@ public class RunController : MonoBehaviour
 
         stageDirector.StartStage(0);
         GameAudio.Instance?.StartRun();
+        Debug.Log($"Run restarted. Reset {resettables.Length} objects.", this);
     }
 }

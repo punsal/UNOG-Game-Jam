@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(InputReader))]
+/// <summary>Moves the player horizontally from drag input.</summary>
 public class PlayerMotor : MonoBehaviour, IResettable
 {
     [SerializeField] private float moveSpeed = 6f;
@@ -66,7 +67,7 @@ public class PlayerMotor : MonoBehaviour, IResettable
         speedMultiplier = multiplier;
     }
 
-public void ResetRun()
+    public void ResetRun()
     {
         speedMultiplier = 1f;
         transform.position = startPosition;

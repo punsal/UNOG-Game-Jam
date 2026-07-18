@@ -1,5 +1,6 @@
 using UnityEngine;
 
+/// <summary>Tracks capped modifiers collected during a run.</summary>
 public class ModifierStack
 {
     private const float MinSpeedMultiplier = 0.7f;

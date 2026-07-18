@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>Controls the initial start prompt and drag hint.</summary>
 public class StartScreen : MonoBehaviour
 {
     [SerializeField] private GameObject startPanel;
@@ -36,6 +37,7 @@ public class StartScreen : MonoBehaviour
 
     public void HandleTapStart()
     {
+        Debug.Log("Start requested.", this);
         startPanel.SetActive(false);
         dragHint.SetActive(true);
         hasMoved = false;

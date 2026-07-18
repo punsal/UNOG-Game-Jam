@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+/// <summary>Tracks player health, damage immunity, and death.</summary>
 public class PlayerHealth : MonoBehaviour, IResettable
 {
     public event Action<int> HealthChanged;
@@ -46,6 +47,7 @@ public class PlayerHealth : MonoBehaviour, IResettable
         }
 
         currentHealth = Mathf.Max(0, currentHealth - amount);
+        Debug.Log($"Player took {amount} damage. Health: {currentHealth}/{maxHealth}.", this);
         invulnerabilityTimer = invulnerabilityDuration;
         GameAudio.Instance?.PlayDamage();
         HealthChanged?.Invoke(currentHealth);
@@ -55,6 +57,7 @@ public class PlayerHealth : MonoBehaviour, IResettable
 
         if (currentHealth <= 0)
         {
+            Debug.Log("Player died.", this);
             Died?.Invoke();
         }
     }

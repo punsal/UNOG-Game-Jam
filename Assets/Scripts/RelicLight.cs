@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+/// <summary>Tracks the relic's remaining light.</summary>
 public class RelicLight : MonoBehaviour, IResettable
 {
     public event Action<float> LightChanged;
@@ -19,6 +20,7 @@ public class RelicLight : MonoBehaviour, IResettable
     public void ChangeLight(float delta)
     {
         currentLight = Mathf.Clamp(currentLight + delta, 0f, 100f);
+        Debug.Log($"Relic light changed by {delta:0.#}. Remaining: {currentLight:0.#}.", this);
         GameAudio.Instance?.SetLightLevel(currentLight / 100f);
         LightChanged?.Invoke(currentLight);
     }

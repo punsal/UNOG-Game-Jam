@@ -3,6 +3,7 @@ using UnityEngine;
 public enum CostType { Blood, Light, Sight, Body }
 
 [CreateAssetMenu(fileName = "CostData", menuName = "Last Light/Cost Data")]
+/// <summary>Defines one altar cost and its display content.</summary>
 public class CostData : ScriptableObject
 {
     [SerializeField] private Sprite icon;

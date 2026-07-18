@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>Converts pointer dragging into horizontal input.</summary>
 public class InputReader : MonoBehaviour
 {
     public event Action<float> OnDrag;
@@ -14,6 +15,10 @@ public class InputReader : MonoBehaviour
 
     public void SetInputEnabled(bool enabled)
     {
+        if (inputEnabled != enabled)
+        {
+            Debug.Log($"Player input {(enabled ? "enabled" : "disabled")}.", this);
+        }
         inputEnabled = enabled;
         isDragging = false;
     }

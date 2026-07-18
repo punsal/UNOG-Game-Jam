@@ -1,5 +1,6 @@
 using UnityEngine;
 
+/// <summary>Applies chosen costs to the current run.</summary>
 public class CostApplier : MonoBehaviour, IResettable
 {
     [SerializeField] private PlayerHealth playerHealth;
@@ -48,6 +49,12 @@ public class CostApplier : MonoBehaviour, IResettable
 
     public void Apply(CostData cost)
     {
+        if (cost == null)
+        {
+            Debug.LogWarning("Cannot apply a null cost.", this);
+            return;
+        }
+
         switch (cost.CostType)
         {
             case CostType.Blood:
@@ -71,6 +78,7 @@ public class CostApplier : MonoBehaviour, IResettable
         }
 
         runState.RecordChoice(cost);
+        Debug.Log($"Applied {cost.CostType} cost ({cost.Value}).", this);
     }
 
     private void ApplyBodyCost(float value)

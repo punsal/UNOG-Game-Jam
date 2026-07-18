@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
+/// <summary>Telegraphs a hazard and damages the player on contact.</summary>
 public class ObstacleBase : MonoBehaviour
 {
     [SerializeField] private int damage = 1;
@@ -60,6 +61,10 @@ public class ObstacleBase : MonoBehaviour
         if (health != null)
         {
             health.ApplyDamage(damage, transform.position);
+        }
+        else
+        {
+            Debug.LogWarning("Player collider has no PlayerHealth component.", other);
         }
     }
 }

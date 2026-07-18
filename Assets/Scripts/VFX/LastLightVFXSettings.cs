@@ -17,6 +17,7 @@ public static class LastLightVFXPalette
 }
 
 [CreateAssetMenu(fileName = "LastLightVFXSettings", menuName = "Last Light/VFX Settings")]
+/// <summary>Stores shared VFX colors and motion settings.</summary>
 public class LastLightVFXSettings : ScriptableObject
 {
     [Header("Pixel grid")]

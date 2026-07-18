@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>Displays the offer assigned to an altar.</summary>
 public class DecisionCard : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer iconRenderer;

@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>Keeps HUD values synchronized with the current run.</summary>
 public class HUDPresenter : MonoBehaviour
 {
     [SerializeField] private PlayerHealth playerHealth;

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+/// <summary>Accepts one altar choice and disables the remaining choice.</summary>
 public class ChoiceGate : MonoBehaviour, IResettable
 {
     [SerializeField] private AltarTrigger altarA;
@@ -15,13 +16,13 @@ public class ChoiceGate : MonoBehaviour, IResettable
 
     private bool hasChosen;
 
-private void OnEnable()
+    private void OnEnable()
     {
         if (altarA != null) altarA.PlayerEntered += HandleEntered;
         if (altarB != null) altarB.PlayerEntered += HandleEntered;
     }
 
-private void OnDisable()
+    private void OnDisable()
     {
         if (altarA != null) altarA.PlayerEntered -= HandleEntered;
         if (altarB != null) altarB.PlayerEntered -= HandleEntered;
@@ -35,6 +36,7 @@ private void OnDisable()
         }
 
         hasChosen = true;
+        Debug.Log($"Choice made at '{altar.name}': {(altar.Offer != null ? altar.Offer.OfferName : "Risk")}", this);
         SetAltarsInteractable(false);
         GameAudio.Instance?.PlayAltarApproach();
         CostChosen?.Invoke(altar.Offer);
