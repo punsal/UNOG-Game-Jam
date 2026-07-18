@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586d66fe10bcd4d4fbbca0b712319b5c, type: 3}
+  m_Name: CD_Blood
+  m_EditorClassIdentifier: Assembly-CSharp::CostData
+  icon: {fileID: 21300000, guid: 1f86dc634956544669c8d4856988d988, type: 3}
+  offerName: Blood Sacrifice
+  benefitCopy: Wider safe corridor in the next stage
+  costCopy: -1 Max Health
+  costType: 0
+  value: -1
