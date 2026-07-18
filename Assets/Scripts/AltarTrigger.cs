@@ -5,6 +5,7 @@ using UnityEngine;
 public class AltarTrigger : MonoBehaviour
 {
     [SerializeField] private CostData offer;
+    [SerializeField] private DecisionCard decisionCard;
 
     public event Action<AltarTrigger> PlayerEntered;
 
@@ -18,6 +19,11 @@ public class AltarTrigger : MonoBehaviour
     public void SetOffer(CostData newOffer)
     {
         offer = newOffer;
+
+        if (decisionCard != null)
+        {
+            decisionCard.SetOffer(newOffer);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

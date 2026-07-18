@@ -612,6 +612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Altar_Safe
       objectReference: {fileID: 0}
+    - target: {fileID: 5315129637593924769, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Text
+      value: -20% Vision
+      objectReference: {fileID: 0}
     - target: {fileID: 5422887497766002271, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -651,6 +655,22 @@ PrefabInstance:
     - target: {fileID: 5422887497766002271, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6d1edc352d92d4fc0894ce158bfbf0af, type: 3}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7691284676665015742, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: offer
@@ -954,9 +974,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dbf7e3309d60c457686613f1ddfc745b, type: 3}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3928017882421781210, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
       propertyPath: m_Name
       value: Altar_Cost
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275948702362396699, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Text
+      value: -10% Speed
       objectReference: {fileID: 0}
     - target: {fileID: 5712078180123671977, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
       propertyPath: offer
@@ -1249,6 +1289,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Altar_Safe
       objectReference: {fileID: 0}
+    - target: {fileID: 5315129637593924769, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Text
+      value: -1 Max Health
+      objectReference: {fileID: 0}
     - target: {fileID: 5422887497766002271, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -1288,6 +1332,22 @@ PrefabInstance:
     - target: {fileID: 5422887497766002271, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1f86dc634956544669c8d4856988d988, type: 3}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7691284676665015742, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: offer
@@ -1372,6 +1432,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Altar_Safe
       objectReference: {fileID: 0}
+    - target: {fileID: 5315129637593924769, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Text
+      value: -20% Vision
+      objectReference: {fileID: 0}
     - target: {fileID: 5422887497766002271, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -1411,6 +1475,22 @@ PrefabInstance:
     - target: {fileID: 5422887497766002271, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6d1edc352d92d4fc0894ce158bfbf0af, type: 3}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7691284676665015742, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: offer
@@ -1607,6 +1687,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Altar_Safe
       objectReference: {fileID: 0}
+    - target: {fileID: 5315129637593924769, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Text
+      value: -10% Speed
+      objectReference: {fileID: 0}
     - target: {fileID: 5422887497766002271, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -1646,6 +1730,22 @@ PrefabInstance:
     - target: {fileID: 5422887497766002271, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dbf7e3309d60c457686613f1ddfc745b, type: 3}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7691284676665015742, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: offer
@@ -1684,6 +1784,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Altar_Safe
       objectReference: {fileID: 0}
+    - target: {fileID: 5315129637593924769, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Text
+      value: -20 Relic Light
+      objectReference: {fileID: 0}
     - target: {fileID: 5422887497766002271, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -1723,6 +1827,22 @@ PrefabInstance:
     - target: {fileID: 5422887497766002271, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 377bb6ce954d941339dee4bae6eaa3a4, type: 3}
+    - target: {fileID: 5504109635026008792, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7691284676665015742, guid: df00bc07ae62e4e28b71af6f48f06475, type: 3}
       propertyPath: offer
@@ -2515,9 +2635,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 377bb6ce954d941339dee4bae6eaa3a4, type: 3}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3928017882421781210, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
       propertyPath: m_Name
       value: Altar_Cost
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275948702362396699, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Text
+      value: -20 Relic Light
       objectReference: {fileID: 0}
     - target: {fileID: 5712078180123671977, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
       propertyPath: offer
@@ -2592,9 +2732,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 377bb6ce954d941339dee4bae6eaa3a4, type: 3}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3928017882421781210, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
       propertyPath: m_Name
       value: Altar_Cost
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275948702362396699, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Text
+      value: -20 Relic Light
       objectReference: {fileID: 0}
     - target: {fileID: 5712078180123671977, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
       propertyPath: offer
@@ -2908,9 +3068,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6d1edc352d92d4fc0894ce158bfbf0af, type: 3}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3928017882421781210, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
       propertyPath: m_Name
       value: Altar_Cost
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275948702362396699, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Text
+      value: -20% Vision
       objectReference: {fileID: 0}
     - target: {fileID: 5712078180123671977, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
       propertyPath: offer
@@ -3838,9 +4018,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1f86dc634956544669c8d4856988d988, type: 3}
+    - target: {fileID: 3188380688829053548, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3928017882421781210, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
       propertyPath: m_Name
       value: Altar_Cost
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275948702362396699, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
+      propertyPath: m_Text
+      value: -1 Max Health
       objectReference: {fileID: 0}
     - target: {fileID: 5712078180123671977, guid: 83e27f8d3660740e1a7e9b295f5d8c1b, type: 3}
       propertyPath: offer
