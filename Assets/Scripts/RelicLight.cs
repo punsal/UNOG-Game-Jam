@@ -19,6 +19,7 @@ public class RelicLight : MonoBehaviour, IResettable
     public void ChangeLight(float delta)
     {
         currentLight = Mathf.Clamp(currentLight + delta, 0f, 100f);
+        GameAudio.Instance?.SetLightLevel(currentLight / 100f);
         LightChanged?.Invoke(currentLight);
     }
 

@@ -36,6 +36,7 @@ private void OnDisable()
 
         hasChosen = true;
         SetAltarsInteractable(false);
+        GameAudio.Instance?.PlayAltarApproach();
         CostChosen?.Invoke(altar.Offer);
         AltarChosen?.Invoke(altar);
     }
