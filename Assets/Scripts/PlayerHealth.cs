@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour, IResettable
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float invulnerabilityDuration = 0.9f;
 
+    private int baselineMaxHealth;
     private int currentHealth;
     private float invulnerabilityTimer;
 
@@ -18,6 +19,7 @@ public class PlayerHealth : MonoBehaviour, IResettable
 
     private void Awake()
     {
+        baselineMaxHealth = maxHealth;
         currentHealth = maxHealth;
     }
 
@@ -46,8 +48,21 @@ public class PlayerHealth : MonoBehaviour, IResettable
         }
     }
 
-public void ResetRun()
+    public void ApplyMaxHealthModifier(int delta)
     {
+        maxHealth = Mathf.Max(1, maxHealth + delta);
+        currentHealth = Mathf.Clamp(currentHealth + delta, 0, maxHealth);
+        HealthChanged?.Invoke(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Died?.Invoke();
+        }
+    }
+
+    public void ResetRun()
+    {
+        maxHealth = baselineMaxHealth;
         currentHealth = maxHealth;
         invulnerabilityTimer = 0f;
         HealthChanged?.Invoke(currentHealth);

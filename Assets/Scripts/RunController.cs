@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class RunController : MonoBehaviour
@@ -10,7 +11,9 @@ public class RunController : MonoBehaviour
     private void Awake()
     {
         playerHealth = player.GetComponent<PlayerHealth>();
-        resettables = player.GetComponents<IResettable>();
+        resettables = player.GetComponents<IResettable>()
+            .Concat(GetComponents<IResettable>())
+            .ToArray();
     }
 
     private void OnEnable()
