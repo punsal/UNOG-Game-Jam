@@ -4,11 +4,12 @@ using UnityEngine;
 public class RunController : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private StageDirector stageDirector;
 
     private PlayerHealth playerHealth;
     private IResettable[] resettables;
 
-private void Awake()
+    private void Awake()
     {
         playerHealth = player.GetComponent<PlayerHealth>();
         resettables = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include).OfType<IResettable>().ToArray();
@@ -35,5 +36,7 @@ private void Awake()
         {
             resettable.ResetRun();
         }
+
+        stageDirector.StartStage(0);
     }
 }
