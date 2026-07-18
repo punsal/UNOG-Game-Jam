@@ -8,12 +8,10 @@ public class RunController : MonoBehaviour
     private PlayerHealth playerHealth;
     private IResettable[] resettables;
 
-    private void Awake()
+private void Awake()
     {
         playerHealth = player.GetComponent<PlayerHealth>();
-        resettables = player.GetComponents<IResettable>()
-            .Concat(GetComponents<IResettable>())
-            .ToArray();
+        resettables = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include).OfType<IResettable>().ToArray();
     }
 
     private void OnEnable()
