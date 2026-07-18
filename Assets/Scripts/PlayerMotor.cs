@@ -29,9 +29,23 @@ public class PlayerMotor : MonoBehaviour, IResettable
     public void SetInput(float normalizedX)
     {
         float worldDelta = normalizedX * moveSpeed * speedMultiplier;
+        float limit = MovementHalfWidth();
         Vector3 position = transform.position;
-        position.x = Mathf.Clamp(position.x + worldDelta, -halfWidth, halfWidth);
+        position.x = Mathf.Clamp(position.x + worldDelta, -limit, limit);
         transform.position = position;
+    }
+
+    // Keep the player inside the visible corridor: screen half-width minus the
+    // wall (0.5) and the player's own half-extent (~1), whichever is tighter.
+    private float MovementHalfWidth()
+    {
+        Camera cam = Camera.main;
+        if (cam == null)
+        {
+            return halfWidth;
+        }
+
+        return Mathf.Min(halfWidth, cam.orthographicSize * cam.aspect - 1.5f);
     }
 
     public void ApplyMovementModifier(float multiplier)
