@@ -1,8 +1,9 @@
 # Last Light — VFX Implementation
 
-Status: complete pass, validated in-editor, **uncommitted by request** (a concurrent
-audio session shares this working tree; commit coordination is manual).
-Motto enforced throughout: **"Every gain flashes briefly. Every loss remains."**
+Status: complete pass, **live Play-Mode validated** (2026-07-19) on branch
+`feature/complete-vfx-pass`. The sacrifice gameplay flow is now wired and
+verified end-to-end. Motto enforced throughout: **"Every gain flashes briefly.
+Every loss remains."**
 
 ## Systems
 
@@ -10,14 +11,14 @@ Motto enforced throughout: **"Every gain flashes briefly. Every loss remains."**
 |---|---|---|---|
 | Carried light core | `LightCoreView.cs` (pre-existing, verified) | PF_Traveller/VisualRoot | `RelicLight.LightChanged` |
 | Sparks + discrete trail | `LightSparksView.cs` | VisualRoot/LightVFX | `RelicLight.LightChanged` + LateUpdate |
-| Damage feedback | `DamageVFXView.cs` | VisualRoot/DamageVFX | `PlayerHealth.Damaged(Vector2)` (new) |
-| Sacrifice transfer | `SacrificeTransferVFX.cs` | VisualRoot/SacrificeVFX | `ChoiceGate.AltarChosen` (new) |
-| Risk acceptance | `RiskAcceptanceVFX.cs` | VisualRoot/SacrificeVFX | null-offer altar via transfer view |
+| Damage feedback | `DamageVFXView.cs` | VisualRoot/DamageVFX | `PlayerHealth.Damaged(Vector2)` |
+| Sacrifice transfer | `SacrificeTransferVFX.cs` | VisualRoot/SacrificeVFX | `ChoiceGate.AltarChosen` |
+| Risk acceptance | `RiskAcceptanceVFX.cs` | VisualRoot/SacrificeVFX | null-offer altar (**content-inactive**, see below) |
 | Persistent losses | `PersistentSacrificeView.cs` | VisualRoot/PersistentLossVisuals | `SacrificeTransferVFX.TransferCompleted` |
 | Pixel vignette | `PixelVignetteView.cs` | HUDCanvas/VignetteRoot | `PersistentSacrificeView` (sight) |
-| HUD loss | `HUDLossVFX.cs` | HUDCanvas | **hook only** — `LoseElement(HUDElement)`; no gameplay cost removes HUD info yet |
+| HUD loss | `HUDLossVFX.cs` | HUDCanvas | **hook only** — no HUD cost type exists |
 | Altar effects | `AltarVFXView.cs` | both altar prefabs (VFXAnchor/AltarVFX) | gate events + per-frame proximity |
-| Hazard telegraphs | `HazardTelegraphVFX.cs` | both hazard prefabs (TelegraphAnchor) | position-driven; warning starts at camera visible top + `warningLeadDistance` (2), mirroring ObstacleBase's audio trigger (fixed `warningY`=12 only as no-camera fallback) |
+| Hazard telegraphs | `HazardTelegraphVFX.cs` | both hazard prefabs (TelegraphAnchor) | position-driven; warning starts at camera visible top + `warningLeadDistance` (2), mirroring ObstacleBase's audio trigger |
 | Section transitions | `SectionTransitionVFX.cs` | HUDCanvas | `StageDirector.StageChanged` |
 | World degradation | `WorldDegradationVFX.cs` | HUDCanvas | StageChanged + AltarChosen |
 | Death + reassembly | `DeathReassemblyVFX.cs` | VisualRoot/DeathVFX | `PlayerHealth.Died` + `ResetRun` |
@@ -26,76 +27,98 @@ Motto enforced throughout: **"Every gain flashes briefly. Every loss remains."**
 | Shared | `LastLightVFXSettings.cs`, `FixedSpritePool.cs`, `SpriteFlash.cs`, `CameraImpulse2D.cs`, `PixelPositionUtility.cs` | — | — |
 
 Settings asset: `Assets/Data/VFX/LastLightVFXSettings.asset` (palette, thresholds
-50/20, PPU 16, `motionScale`).
+50/20, PPU 16, `motionScale` 0.25–1 reduced-motion hook via `SetMotionScale`).
 
-## Gameplay files touched for VFX (all additive; audio session's edits preserved)
+## Gameplay integration (verified live)
 
-- `PlayerHealth.cs` — `Damaged(Vector2 hitDirection)` presentation event + `ApplyDamage(int, Vector2 sourcePos)` overload.
-- `ObstacleBase.cs` — passes `transform.position` into the new overload.
-- `ChoiceGate.cs` — `AltarChosen(AltarTrigger)` presentation event + `AltarA`/`AltarB` getters.
+- `PlayerHealth.cs` — `Damaged(Vector2)` presentation event + `ApplyDamage(int, Vector2)` overload.
+- `ObstacleBase.cs` — passes `transform.position` into the overload.
+- `ChoiceGate.cs` — `AltarChosen(AltarTrigger)` presentation event + `AltarA/AltarB` getters.
+- `CostApplier.cs` — **sacrifice flow fix**: subscribes once (Start/OnDestroy) to every
+  `ChoiceGate.CostChosen`; null offers (risk) pay nothing. Verified live: each cost
+  applies exactly once, second altar ignored, resets don't re-apply, audio calls preserved.
 
-**Known gameplay gap (not fixed, by policy):** nothing subscribes
-`ChoiceGate.CostChosen` → `CostApplier.Apply` is never called, so costs don't
-actually apply. VFX intentionally integrates through `AltarChosen`
-so all effects fire regardless; wire `CostChosen → CostApplier.Apply` when ready
-(PersistentSacrificeView tracks its own totals and will stay in sync visually).
+**Restart is delayed, not synchronous:** `RunController` restarts 0.45 s after death
+(audio sting window, input disabled meanwhile). `DeathReassemblyVFX.ResetRun`
+keeps an active death timeline across that reset; idle resets clear everything.
 
-## Final tiers (no ending logic invented)
+## Content notes (facts, not bugs)
 
-`EndingResolver` is binary (Dark/Light at 0 light). Visual tiers:
-Dark → **bad**; Light with ≥50 remaining → **good**; otherwise **medium**.
-Threshold serialized (`goodLightThreshold`). Recipient transform is serialized and
-optional (defaults to 4u above the player). Note: `OutcomeScreen` shows its panel
-on the same event — check overlap during device review.
+- **Every scene gate offers two costs** (no null-offer altar exists), so the risk
+  path (`RiskAcceptanceVFX`, altar collapse reaction) is *content-inactive*. The
+  code is live-ready: any altar left with `offer = None` becomes a true risk altar.
+  Altar chosen-reactions follow the actual offer (absorb when a cost is paid),
+  not the prefab's idle styling (Pay=yellow inward motes / Risk=cyan rising motes).
+- Cost data: `CD_Blood -1`, `CD_Body -0.1` (speed), `CD_Light -20`, `CD_Sight -0.2`.
+  No positive Body value exists → **size-penalty ring inactive** (functional, no data).
+- No HUD or audio-layer cost type exists → `HUDLossVFX.LoseElement` and
+  `PersistentSacrificeView.PlaySensoryCollapse()` are inactive hooks.
+- Endings are binary (Dark/Light at 0). Visual tiers: Dark→bad; Light ≥50→good;
+  else medium (`goodLightThreshold` serialized).
 
-## Pools & budgets (all prefab-authored, start disabled, zero runtime Instantiate/Destroy)
+## Play Mode validation performed (MainScene, live frames)
 
-sparks 8 · trail 3 · debris 8 · sacrifice 12 · risk lines 6+wave · altar motes 4/altar
-· link dashes 3/altar · dust 3/spike · blade edges 2 · death fragments 8 · final motes 8.
-Camera impulse ≤80 ms; damage edge ≤0.12 s; hit-stop 80 ms (Play-Mode-only, serialized, 0 disables).
+Editor gotcha solved: set `Application.runInBackground = true` in Play Mode —
+without it this editor's player loop freezes while unfocused.
 
-## Placeholders (ALL current VFX art)
+- **Light states:** idle glow pulse 0.5↔0.5625 white core; low 45 → amber glow,
+  base 0.375; critical 15 → ember glow 0.3125, core flicker observed (white and
+  ember samples); zero → sparks 0, trail 0, min ember footprint, no yellow left.
+  Trail hidden while stationary.
+- **Damage:** left and right hits → hp changed, 5 debris, burst on contact side,
+  white flash + restore, camera restored to origin, edge frame cleared,
+  `timeScale` 1, rapid second hit correctly blocked by invulnerability.
+- **Pay chain (real gates):** Sight → sightMult 1→0.8, 9 transfer particles,
+  hit-stop engaged and restored, vignette level 2 from real state. Body(speed) →
+  motor 0.9 and spark energy 0.9 in lockstep. Blood → maxHP 3→2, crack overlay on
+  (missing-pixel overlay correctly waits for a 2nd Blood). Light → 100→80.
+  Exactly-once verified (second altar invocation ignored). Degradation stepped to 3.
+- **Hazards:** blade telegraph leading-edge follows real oscillation (right edge
+  while moving right); spike crack observed live at full brightness in the
+  imminent window, warning began above the visible top edge.
+- **Sections:** stage 1 scanline with section accent; degradation quantized.
+- **Death/restart:** 8 fragments + rising/extinguishing ember at death position;
+  delayed 0.45 s restart verified; multi-minute unattended soak (repeated organic
+  deaths/restarts/altar hits) produced zero console errors and stable timeScale.
+- **Finals:** good = 8 motes + 0.10-alpha broad tint, cleared after rise;
+  medium = 6 motes; bad = 1 pixel + navy dark closure 0.55, restart clears.
+  Outcome panel shows over the VFX (UI is a separate canvas above ScreenFX).
+- **Composition screenshot** (fresh run): silhouette readable, relic distinct,
+  HUD crisp, no blur, input area clear.
 
-All 38 sprites under `Assets/Art/VFX/**` are deterministic generated placeholders
-(single-sprite PNGs, palette-exact, PPU 16/Point/uncompressed via
-`Assets/Editor/VFXTexturePostprocessor.cs` — scoped to `Assets/Art/VFX/` only).
-Replace by overwriting the PNG at the same path — no prefab rewiring needed.
-Aseprite pipeline: `Tools/Aseprite/` (`vfx_manifest.lua`, `create_vfx_templates.lua`,
-`validate_vfx_palette.lua`, `export_vfx.lua`, `export_vfx.sh|.ps1`). Aseprite CLI was
-not installed on this machine; run `Tools/Aseprite/export_vfx.sh` once it is —
-templates are created into `Art/VFX/` without overwriting existing sources.
+Not observed live: risk acceptance in real content (no data — synthetic only),
+trail while moving under real drag input (verified synthetically; no touch input
+in editor), device aspect ratios other than the game view, on-device performance,
+Profiler GC capture (static review only: pooled renderers, no per-frame
+allocations/LINQ/`.material`, one-time `Find*` in `Start` only).
 
-## Reduced motion
+## Assets
 
-`LastLightVFXSettings.motionScale` (0.25–1, default 1; runtime hook
-`SetMotionScale`). Scales camera impulse, risk-line speed, fragment travel.
-Telegraph colors/shapes unaffected.
+All 38 sprites under `Assets/Art/VFX/**` are deterministic placeholders
+(single-sprite PNGs, palette-exact). Import enforced by
+`Assets/Editor/VFXTexturePostprocessor.cs` (scoped to `Assets/Art/VFX/` only):
+Sprite/**Single**, PPU 16, Point, Uncompressed, no mips, Clamp, alpha transparency,
+FullRect. Replace art by overwriting the PNG at the same path — verified: no
+prefab rewiring needed (references were re-verified after the Single-mode fix).
+Aseprite pipeline in `Tools/Aseprite/`; CLI not installed — when available run
+`Tools/Aseprite/export_vfx.sh` (templates never overwrite existing sources).
 
-## Audio-loss visual hook
+## Pools & budgets
 
-`PersistentSacrificeView.PlaySensoryCollapse()` — purple two-tick body flash.
-No audio-layer cost exists yet; call it when one is added.
+sparks 8 · trail 3 · debris 8 · sacrifice 12 · risk lines 6+wave · altar motes
+4/altar · link dashes 3/altar · dust 3/spike · blade edges 2 · death fragments 8
+· final motes 8. Camera impulse ≤80 ms; damage edge ≤0.12 s; hit-stop 80 ms
+(Play-Mode-only). Sorting: order offsets inside the traveller SortingGroup
+(trail 4 < core 5 < sparks 6 < transfer 7 < final 9); no new sorting layers.
 
-## Validation notes
+## Human review checklist (visual pass on device)
 
-Everything above was validated **in-editor** by driving public `Tick(dt)` /
-`ApplyX()` methods on loaded prefab contents (this editor does not tick Play Mode
-reliably, and it is shared with the audio session — no Play Mode, no scene loads).
-Not visually verified: real-time composition at 360x640, overlap of final VFX
-with the outcome panel, and on-device performance. Reflection was used only to
-drive private handlers in validation, never in runtime code.
-
-## Human review checklist
-
-- [ ] Full / low / critical / zero light (core pulse, spark density, trail 3/2/1/0)
-- [ ] Damage: white flash, contact-side burst, debris, edge frame, core lag, impulse
-- [ ] Pay sacrifice per category (Blood/Light/Sight/Body): pull-to-altar + permanent mark
-- [ ] Accept risk: cyan collapse, red top lines, wave stops above input area
-- [ ] Vision loss levels 1-3 + severe jitter + reset
-- [ ] HUD loss via `HUDLossVFX.LoseElement` (manual trigger for now)
-- [ ] Body crack (1st blood), missing pixels (2nd), spark-energy drop (speed)
-- [ ] Spike crack 3-tick warning + dust; blade leading edge + reversal squash
-- [ ] Six sections: scanline accents cyan→purple, degradation tint steps
-- [ ] Death burst → converge → yellow spark, repeated deaths, no stale VFX
-- [ ] Good / medium / bad finals (force via light value before the last stage)
-- [ ] 360x640 readability, lower input third clear, no subpixel shimmer
+- [ ] Light states in motion; trail 3/2/1/0 while dragging
+- [ ] Damage from both sides during real dodging
+- [ ] Each cost's transfer + permanent mark at real altars
+- [ ] Spike crack timing vs actual dodge difficulty; blade edge readability
+- [ ] Six-section scanline accents and degradation feel
+- [ ] Death fragments + reassembly during the 0.45 s restart window
+- [ ] All three finals vs the outcome panel (overlap acceptable?)
+- [ ] 360x640 + one taller aspect; lower input third clear; no shimmer
+- [ ] Placeholder art replacement priority: spark/trail, damage burst, telegraphs
