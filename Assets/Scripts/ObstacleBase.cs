@@ -20,7 +20,7 @@ public class ObstacleBase : MonoBehaviour
         var health = other.GetComponent<PlayerHealth>();
         if (health != null)
         {
-            health.ApplyDamage(damage);
+            health.ApplyDamage(damage, transform.position);
         }
     }
 }

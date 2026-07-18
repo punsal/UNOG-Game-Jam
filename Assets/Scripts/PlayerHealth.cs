@@ -5,6 +5,8 @@ public class PlayerHealth : MonoBehaviour, IResettable
 {
     public event Action<int> HealthChanged;
     public event Action Died;
+    // Presentation-only: direction the hit came from (normalized source->player), Vector2.zero when unknown.
+    public event Action<Vector2> Damaged;
 
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float invulnerabilityDuration = 0.9f;
@@ -33,6 +35,11 @@ public class PlayerHealth : MonoBehaviour, IResettable
 
     public void ApplyDamage(int amount)
     {
+        ApplyDamage(amount, (Vector2)transform.position);
+    }
+
+    public void ApplyDamage(int amount, Vector2 sourceWorldPosition)
+    {
         if (amount <= 0 || IsInvulnerable || currentHealth <= 0)
         {
             return;
@@ -41,6 +48,9 @@ public class PlayerHealth : MonoBehaviour, IResettable
         currentHealth = Mathf.Max(0, currentHealth - amount);
         invulnerabilityTimer = invulnerabilityDuration;
         HealthChanged?.Invoke(currentHealth);
+
+        Vector2 hitDirection = (Vector2)transform.position - sourceWorldPosition;
+        Damaged?.Invoke(hitDirection.sqrMagnitude > 0.0001f ? hitDirection.normalized : Vector2.zero);
 
         if (currentHealth <= 0)
         {
