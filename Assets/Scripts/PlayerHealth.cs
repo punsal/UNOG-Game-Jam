@@ -62,6 +62,18 @@ public class PlayerHealth : MonoBehaviour, IResettable
         }
     }
 
+    public void Heal(int amount)
+    {
+        if (amount <= 0 || currentHealth <= 0 || currentHealth >= maxHealth)
+        {
+            return;
+        }
+
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        Debug.Log($"Player healed {amount}. Health: {currentHealth}/{maxHealth}.", this);
+        HealthChanged?.Invoke(currentHealth);
+    }
+
     public void ApplyMaxHealthModifier(int delta)
     {
         maxHealth = Mathf.Max(1, maxHealth + delta);

@@ -78,6 +78,11 @@ public class CostApplier : MonoBehaviour, IResettable
                 break;
         }
 
+        // The altar takes, but steadies: every paid sacrifice restores 1 HP,
+        // so chip damage is recoverable at gates while in-stage mistakes
+        // stay lethal. Risk altars pay nothing and heal nothing.
+        playerHealth.Heal(1);
+
         runState.RecordChoice(cost);
         Debug.Log($"Applied {cost.CostType} cost ({cost.Value}). Run state: health {playerHealth.CurrentHealth}/{playerHealth.MaxHealth}, light {relicLight.CurrentLight:0.#}, speed x{runState.Modifiers.SpeedMultiplier:0.##}, sight x{runState.Modifiers.SightMultiplier:0.##}, scale x{runState.Modifiers.BodyScaleMultiplier:0.##}, choices {runState.ChosenCosts.Count}.", this);
 

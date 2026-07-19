@@ -188,7 +188,9 @@ public class AltarVFXView : MonoBehaviour, IResettable
         }
 
         // Risk altar: pink instability blink underneath, one hard tick.
-        if (kind == AltarKind.Risk)
+        // Only a true no-cost altar signals danger; a risk-styled altar
+        // carrying a real offer must not blink a warning at the player.
+        if (kind == AltarKind.Risk && altarTrigger != null && altarTrigger.Offer == null)
         {
             instabilityTimer -= dt;
             if (instabilityTimer <= -0.08f)
