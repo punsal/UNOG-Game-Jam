@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4cde831766e543bea4d848754b32ea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputReader
-  dragSensitivity: 1
+  dragSensitivity: 2.2
 --- !u!1001 &950064186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -810,7 +810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BenefitToast
   toastText: {fileID: 2076814511}
   benefitApplier: {fileID: 2142782807}
-  showSeconds: 3
+  showSeconds: 3.5
 --- !u!1 &1383478889
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,13 +1302,13 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 25.6
+  m_fontSizeBase: 25.6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1374,8 +1374,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1364661317}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.05, y: 0.84}
-  m_AnchorMax: {x: 0.95, y: 0.9}
+  m_AnchorMin: {x: 0.05, y: 0.7}
+  m_AnchorMax: {x: 0.95, y: 0.78}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1484,12 +1484,12 @@ MonoBehaviour:
   scrollSpeed: 4
   spawnY: 4
   stageDurations:
+  - 22
+  - 22
+  - 26
+  - 26
+  - 28
   - 30
-  - 30
-  - 35
-  - 35
-  - 40
-  - 45
 --- !u!114 &2142782807
 MonoBehaviour:
   m_ObjectHideFlags: 0

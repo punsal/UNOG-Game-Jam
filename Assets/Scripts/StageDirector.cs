@@ -10,11 +10,11 @@ public class StageDirector : MonoBehaviour, IResettable
     [SerializeField] private RelicLight relicLight;
     [SerializeField] private float scrollSpeed = 4f;
     [SerializeField] private float spawnY = 20f;
-    // Target scroll seconds per stage, from the Content & Tuning sheet stage
-    // targets (25-35s early, 30-40s mid, 35-50s late). Scroll speed is derived
-    // from each stage's actual EndMarker distance, so stage length can change
-    // without retuning. A missing or zero entry falls back to scrollSpeed.
-    [SerializeField] private float[] stageDurations = { 30f, 30f, 35f, 35f, 40f, 45f };
+    // Target scroll seconds per stage. Retuned 2026-07-19 for the jam's
+    // under-3-minute total: 154s scroll plus decision time. Scroll speed is
+    // derived from each stage's actual EndMarker distance, so stage length can
+    // change without retuning. A missing or zero entry falls back to scrollSpeed.
+    [SerializeField] private float[] stageDurations = { 22f, 22f, 26f, 26f, 28f, 30f };
 
     public event Action<int> StageChanged;
 

@@ -8,12 +8,27 @@ public class MovingBlade : MonoBehaviour, IResettable
     [SerializeField] private float phase = 0f;
 
     private Vector3 startingLocalPosition;
+    private bool startCaptured;
     private float elapsed;
     private float speedMultiplier = 1f;
 
     private void Awake()
     {
-        startingLocalPosition = transform.localPosition;
+        CaptureStartingPosition();
+    }
+
+    // Awake order differs per platform: at scene load a stage can be
+    // deactivated before its blades ever ran Awake, and the first ResetRun
+    // then arrives pre-Awake. Without this guard it oscillated around the
+    // uncaptured default origin, stacking every blade at the stage root
+    // (observed on device, invisible in the editor's Awake order).
+    private void CaptureStartingPosition()
+    {
+        if (!startCaptured)
+        {
+            startCaptured = true;
+            startingLocalPosition = transform.localPosition;
+        }
     }
 
     private void Update()
@@ -45,6 +60,7 @@ public class MovingBlade : MonoBehaviour, IResettable
 
     public void ResetRun()
     {
+        CaptureStartingPosition();
         elapsed = 0f;
         speedMultiplier = 1f;
         ApplyOscillation(0f);

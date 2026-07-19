@@ -7,7 +7,8 @@ public class InputReader : MonoBehaviour
 {
     public event Action<float> OnDrag;
 
-    [SerializeField] private float dragSensitivity = 1f;
+    // One comfortable half-screen swipe should cross most of the corridor.
+    [SerializeField] private float dragSensitivity = 2.2f;
 
     private bool isDragging;
     private Vector2 lastPointerPosition;

@@ -5,7 +5,7 @@
 - Portrait Unity 2D auto-runner.
 - One-finger horizontal drag control.
 - Six fixed stages.
-- Target run length: 3-5 minutes.
+- Target run length: under 3 minutes total (jam rule, confirmed 2026-07-19; supersedes the earlier 3-5 minute target).
 - Health and relic light are separate resources.
 - Two physical offers appear at the end of a stage; the stage holds at the gate until a choice is accepted.
 - Altars display only their offer icon in the world.

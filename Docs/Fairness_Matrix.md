@@ -19,16 +19,16 @@ permanent modifiers, computed from actual prefab colliders (2026-07-19).
   safe lanes must fit in the scroll time between rows minus a 0.4 s
   reaction allowance.
 
-## Results (all PASS)
+## Results (all PASS — retuned durations 22/22/26/26/28/30s, 2026-07-19)
 
-| Stage | Rows | Narrowest safe lane | Tightest transition margin |
-| --- | --- | --- | --- |
-| 1 | 5 | 1.58 u | +8.3 u |
-| 2 | 5 | 0.18 u (wall refuge) | +8.5 u |
-| 3 | 7 | 0.18 u (wall refuge) | +6.3 u |
-| 4 | 7 | 0.18 u (wall refuge) | +7.4 u |
-| 5 | 7 | 0.18 u (wall refuge) | +9.2 u |
-| 6 | 9 | 0.18 u (wall refuge) | +7.1 u |
+| Stage | Rows | Scroll speed | Narrowest safe lane | Tightest transition margin |
+| --- | --- | --- | --- | --- |
+| 1 | 5 | 2.14 | 1.58 u | +4.7 u |
+| 2 | 5 | 2.14 | 0.18 u (wall refuge) | +4.9 u |
+| 3 | 7 | 1.81 | 0.18 u (wall refuge) | +3.9 u |
+| 4 | 7 | 1.81 | 0.18 u (wall refuge) | +4.2 u |
+| 5 | 7 | 1.68 | 0.18 u (wall refuge) | +4.9 u |
+| 6 | 9 | 1.57 | 0.18 u (wall refuge) | +3.1 u |
 
 Notes:
 
