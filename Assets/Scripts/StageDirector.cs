@@ -10,6 +10,11 @@ public class StageDirector : MonoBehaviour, IResettable
     [SerializeField] private RelicLight relicLight;
     [SerializeField] private float scrollSpeed = 4f;
     [SerializeField] private float spawnY = 20f;
+    // Target scroll seconds per stage, from the Content & Tuning sheet stage
+    // targets (25-35s early, 30-40s mid, 35-50s late). Scroll speed is derived
+    // from each stage's actual EndMarker distance, so stage length can change
+    // without retuning. A missing or zero entry falls back to scrollSpeed.
+    [SerializeField] private float[] stageDurations = { 30f, 30f, 35f, 35f, 40f, 45f };
 
     public event Action<int> StageChanged;
 
@@ -22,6 +27,7 @@ public class StageDirector : MonoBehaviour, IResettable
     private ChoiceGate activeGate;
     private Collider2D activeGateAltarCollider;
     private bool holdLogged;
+    private float currentScrollSpeed;
 
     private void Awake()
     {
@@ -51,7 +57,11 @@ public class StageDirector : MonoBehaviour, IResettable
         activeGate = stage.GetComponentInChildren<ChoiceGate>(true);
         activeGateAltarCollider = activeGate != null ? activeGate.AltarA.GetComponent<Collider2D>() : null;
         holdLogged = false;
-        Debug.Log($"Stage {index + 1}/{stages.Length} started.", this);
+
+        float travelDistance = stage.Find("EndMarker").position.y - player.position.y;
+        float duration = stageDurations != null && index < stageDurations.Length ? stageDurations[index] : 0f;
+        currentScrollSpeed = duration > 0f ? travelDistance / duration : scrollSpeed;
+        Debug.Log($"Stage {index + 1}/{stages.Length} started; {travelDistance:0.#} units at speed {currentScrollSpeed:0.##} targeting {(duration > 0f ? duration : travelDistance / scrollSpeed):0.#}s.", this);
         StageChanged?.Invoke(index);
     }
 
@@ -68,7 +78,7 @@ public class StageDirector : MonoBehaviour, IResettable
     private void Tick(float deltaTime)
     {
         var stage = stages[currentIndex];
-        float move = scrollSpeed * deltaTime;
+        float move = currentScrollSpeed * deltaTime;
 
         // An unchosen gate stops the scroll at the player's level: the run cannot
         // continue until a sacrifice is committed. This also prevents a hitched
