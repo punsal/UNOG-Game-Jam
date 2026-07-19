@@ -19,6 +19,9 @@ public class StageDirector : MonoBehaviour, IResettable
     private int currentIndex = -1;
     private bool scrolling;
     private float stageStartTime;
+    private ChoiceGate activeGate;
+    private Collider2D activeGateAltarCollider;
+    private bool holdLogged;
 
     private void Awake()
     {
@@ -45,6 +48,9 @@ public class StageDirector : MonoBehaviour, IResettable
         stage.gameObject.SetActive(true);
         scrolling = true;
         stageStartTime = Time.time;
+        activeGate = stage.GetComponentInChildren<ChoiceGate>(true);
+        activeGateAltarCollider = activeGate != null ? activeGate.AltarA.GetComponent<Collider2D>() : null;
+        holdLogged = false;
         Debug.Log($"Stage {index + 1}/{stages.Length} started.", this);
         StageChanged?.Invoke(index);
     }
@@ -61,15 +67,38 @@ public class StageDirector : MonoBehaviour, IResettable
 
     private void Tick(float deltaTime)
     {
-        // A hitched frame can scroll the stage past hazards and gates in one step
-        // (observed on-device in the G3 pass); flag it so skipped content is explainable.
-        if (deltaTime > 0.25f)
+        var stage = stages[currentIndex];
+        float move = scrollSpeed * deltaTime;
+
+        // An unchosen gate stops the scroll at the player's level: the run cannot
+        // continue until a sacrifice is committed. This also prevents a hitched
+        // frame from carrying the stage past the gate.
+        if (activeGate != null && !activeGate.HasChosen)
         {
-            Debug.LogWarning($"Frame delta {deltaTime:0.###}s scrolled stage {currentIndex + 1} by {scrollSpeed * deltaTime:0.##} units in one step; hazards or gates may have been skipped.", this);
+            // Transform-based, not Collider2D.bounds: bounds are only valid after a
+            // physics step, which cannot be assumed at this read point.
+            float altarCenterY = activeGateAltarCollider.transform.TransformPoint(activeGateAltarCollider.offset).y;
+            float distanceToHold = altarCenterY - player.position.y;
+            if (distanceToHold < move)
+            {
+                move = Mathf.Max(0f, distanceToHold);
+                if (!holdLogged)
+                {
+                    holdLogged = true;
+                    Debug.Log($"Stage {currentIndex + 1} held at the choice gate; waiting for a sacrifice.", this);
+                }
+            }
         }
 
-        var stage = stages[currentIndex];
-        stage.position += Vector3.down * scrollSpeed * deltaTime;
+        // A hitched frame can scroll the stage past hazards in one step (observed
+        // on-device in the G3 pass); flag the movement actually applied so skipped
+        // content is explainable. The gate hold above already clamps gate skips.
+        if (deltaTime > 0.25f && move > 0f)
+        {
+            Debug.LogWarning($"Frame delta {deltaTime:0.###}s scrolled stage {currentIndex + 1} by {move:0.##} units in one step; hazards may have been skipped.", this);
+        }
+
+        stage.position += Vector3.down * move;
 
         var endMarker = stage.Find("EndMarker");
         if (endMarker.position.y <= player.position.y)
@@ -80,6 +109,11 @@ public class StageDirector : MonoBehaviour, IResettable
 
     public void CompleteCurrentStage()
     {
+        if (activeGate != null && !activeGate.HasChosen)
+        {
+            Debug.LogWarning($"Stage {currentIndex + 1} completed without a committed choice; check the gate/EndMarker ordering in this stage.", this);
+        }
+
         Debug.Log($"Stage {currentIndex + 1}/{stages.Length} completed in {Time.time - stageStartTime:0.#}s.", this);
         scrolling = false;
         stages[currentIndex].gameObject.SetActive(false);
@@ -98,6 +132,8 @@ public class StageDirector : MonoBehaviour, IResettable
     {
         scrolling = false;
         currentIndex = -1;
+        activeGate = null;
+        activeGateAltarCollider = null;
 
         for (int i = 0; i < stages.Length; i++)
         {

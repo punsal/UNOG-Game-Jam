@@ -13,6 +13,7 @@ public class ChoiceGate : MonoBehaviour, IResettable
 
     public AltarTrigger AltarA => altarA;
     public AltarTrigger AltarB => altarB;
+    public bool HasChosen => hasChosen;
 
     private bool hasChosen;
 
