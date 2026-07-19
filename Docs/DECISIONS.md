@@ -7,8 +7,12 @@
 - Six fixed stages.
 - Target run length: 3-5 minutes.
 - Health and relic light are separate resources.
-- Two physical offers appear at the end of a stage.
-- Entering an altar commits exactly one choice; there is no confirmation button.
+- Two physical offers appear at the end of a stage; the stage holds at the gate until a choice is accepted.
+- Altars display only their offer icon in the world.
+- Entering an altar opens a confirmation popup showing the offer's icon, benefit, and cost, with Accept and Decline.
+- Accepting commits exactly one choice, applies its effects, and resumes the run.
+- Declining closes the popup, returns the traveller to the corridor centre, and leaves both altars armed.
+- (Superseded 2026-07-19: "Entering an altar commits exactly one choice; there is no confirmation button." Reversed because gates became mandatory with a hold — accidental drags near two armed triggers made instant commitment a UX hazard, and readable benefit/cost comparison needs more space than the in-world cards.)
 - Permanent costs use bounded modifiers.
 - MVP hazards are spike wall and moving blade.
 - Two endings are required; a third is conditional.
