@@ -79,10 +79,12 @@ public class PixelVignetteView : MonoBehaviour, IResettable
         float vert = vertInsets[Mathf.Clamp(level, 0, vertInsets.Length - 1)];
         float jitter = level >= 3 && jitterFlip ? jitterPixels : 0f;
 
+        // All four edges breathe together: partial jitter read as a rendering
+        // bug ("some move, some don't") in playtest.
         SetPanel(leftPanel, new Vector2(0f, 0f), new Vector2(0f, 1f), new Vector2(side + jitter, 0f), true);
-        SetPanel(rightPanel, new Vector2(1f, 0f), new Vector2(1f, 1f), new Vector2(side + asymmetry, 0f), false);
-        SetPanel(topPanel, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, vert + asymmetry * 0.5f), false);
-        SetPanel(bottomPanel, new Vector2(0f, 0f), new Vector2(1f, 0f), new Vector2(0f, vert - jitter), true);
+        SetPanel(rightPanel, new Vector2(1f, 0f), new Vector2(1f, 1f), new Vector2(side + asymmetry + jitter, 0f), false);
+        SetPanel(topPanel, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, vert + asymmetry * 0.5f + jitter), false);
+        SetPanel(bottomPanel, new Vector2(0f, 0f), new Vector2(1f, 0f), new Vector2(0f, vert + jitter), true);
     }
 
     private void SetPanel(RectTransform panel, Vector2 anchorMin, Vector2 anchorMax, Vector2 size, bool positive)

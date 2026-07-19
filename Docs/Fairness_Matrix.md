@@ -28,7 +28,10 @@ permanent modifiers, computed from actual prefab colliders (2026-07-19).
 | 3 | 7 | 1.81 | 0.18 u (wall refuge) | +3.9 u |
 | 4 | 7 | 1.81 | 0.18 u (wall refuge) | +4.2 u |
 | 5 | 7 | 1.68 | 0.18 u (wall refuge) | +4.9 u |
-| 6 | 9 | 1.57 | 0.18 u (wall refuge) | +3.1 u |
+| 6 | 8 | 1.57 | 0.18 u (wall refuge) | +3.1 u |
+
+(Stage 6 eased post-playtest: blade speeds capped at 2.4, final spike row
+removed — margins only improve over the values above.)
 
 Notes:
 
