@@ -14,6 +14,7 @@ public class GodModeToggle : MonoBehaviour
 
     private void Update()
     {
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
         if (!TapThisFrame(out Vector2 pos))
         {
             return;
@@ -43,6 +44,7 @@ public class GodModeToggle : MonoBehaviour
                 toast.ShowMessage(enabled ? "God mode on" : "God mode off");
             }
         }
+#endif
     }
 
     private bool TapThisFrame(out Vector2 pos)

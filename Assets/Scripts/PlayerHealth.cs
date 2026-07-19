@@ -26,12 +26,21 @@ public class PlayerHealth : MonoBehaviour, IResettable
 
     public void SetGodMode(bool enabled)
     {
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
         godMode = enabled;
         Debug.Log($"God mode {(enabled ? "enabled" : "disabled")}.", this);
+#else
+        godMode = false;
+#endif
     }
 
     private void Awake()
     {
+#if !DEVELOPMENT_BUILD && !UNITY_EDITOR
+        // Release builds can never run god mode, even if the scene shipped
+        // with the flag serialized on.
+        godMode = false;
+#endif
         baselineMaxHealth = maxHealth;
         currentHealth = maxHealth;
     }
