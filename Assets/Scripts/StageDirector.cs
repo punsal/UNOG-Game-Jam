@@ -65,6 +65,10 @@ public class StageDirector : MonoBehaviour, IResettable
         StageChanged?.Invoke(index);
     }
 
+    // One long frame (GC pause, thermal throttle, focus loss) must not scroll the
+    // stage past hazards in a single step; observed on-device in the G3 pass.
+    private const float MaxTickDelta = 0.1f;
+
     private void Update()
     {
         if (!scrolling)
@@ -72,7 +76,12 @@ public class StageDirector : MonoBehaviour, IResettable
             return;
         }
 
-        Tick(Time.deltaTime);
+        float deltaTime = Time.deltaTime;
+        if (deltaTime > MaxTickDelta)
+        {
+            Debug.LogWarning($"Frame delta {deltaTime:0.###}s clamped to {MaxTickDelta:0.##}s for stage scroll.", this);
+        }
+        Tick(Mathf.Min(deltaTime, MaxTickDelta));
     }
 
     private void Tick(float deltaTime)
@@ -98,14 +107,6 @@ public class StageDirector : MonoBehaviour, IResettable
                     Debug.Log($"Stage {currentIndex + 1} held at the choice gate; waiting for a sacrifice.", this);
                 }
             }
-        }
-
-        // A hitched frame can scroll the stage past hazards in one step (observed
-        // on-device in the G3 pass); flag the movement actually applied so skipped
-        // content is explainable. The gate hold above already clamps gate skips.
-        if (deltaTime > 0.25f && move > 0f)
-        {
-            Debug.LogWarning($"Frame delta {deltaTime:0.###}s scrolled stage {currentIndex + 1} by {move:0.##} units in one step; hazards may have been skipped.", this);
         }
 
         stage.position += Vector3.down * move;
