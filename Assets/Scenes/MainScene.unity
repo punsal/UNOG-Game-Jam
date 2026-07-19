@@ -1522,6 +1522,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6080865182334235710, guid: fd9c3ee56838c4e4e9d07eaf9f086fc5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7021879536393338761, guid: fd9c3ee56838c4e4e9d07eaf9f086fc5, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1711,6 +1715,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4123896782915577051, guid: 072a7b47d1db742079318034f4240faa, type: 3}
+      propertyPath: m_SortingOrder
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7410561278096923734, guid: 072a7b47d1db742079318034f4240faa, type: 3}
       propertyPath: m_Name
       value: StartCanvas
@@ -1819,6 +1827,10 @@ PrefabInstance:
     - target: {fileID: 4799045727465730903, guid: 9ff990d2a694a499f8d1e5143845311c, type: 3}
       propertyPath: m_Name
       value: ChoicePopupCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295152406452090957, guid: 9ff990d2a694a499f8d1e5143845311c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1951,6 +1963,10 @@ PrefabInstance:
     - target: {fileID: 3291726233478358865, guid: 9f2cbd9f138964b9a9cd3fc10f57f6ad, type: 3}
       propertyPath: m_Name
       value: DeathCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5038594154432212019, guid: 9f2cbd9f138964b9a9cd3fc10f57f6ad, type: 3}
+      propertyPath: m_SortingOrder
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5067345028538919082, guid: 9f2cbd9f138964b9a9cd3fc10f57f6ad, type: 3}
       propertyPath: m_Pivot.x
