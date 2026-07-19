@@ -118,6 +118,11 @@ public class StageDirector : MonoBehaviour, IResettable
         }
     }
 
+    public void StopScrolling()
+    {
+        scrolling = false;
+    }
+
     public void CompleteCurrentStage()
     {
         if (activeGate != null && !activeGate.HasChosen)

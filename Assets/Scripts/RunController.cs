@@ -7,14 +7,14 @@ public class RunController : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private StageDirector stageDirector;
-    // Gap between the death sting and the restart, so the 0.2s music fade
-    // and sting are audible before the new stems schedule.
-    [SerializeField] private float deathRestartDelay = 0.45f;
+    [SerializeField] private DeathScreen deathScreen;
+    // Beat between the death sting/VFX and the death screen appearing.
+    [SerializeField] private float deathScreenDelay = 0.45f;
 
     private PlayerHealth playerHealth;
     private InputReader inputReader;
     private IResettable[] resettables;
-    private Coroutine deathRestartRoutine;
+    private Coroutine deathScreenRoutine;
 
     private void Awake()
     {
@@ -35,38 +35,36 @@ public class RunController : MonoBehaviour
 
     private void HandleDeath()
     {
-        if (deathRestartRoutine != null)
+        if (deathScreenRoutine != null)
         {
             return;
         }
 
-        Debug.Log($"Player died on stage {stageDirector.CurrentStageNumber}; restarting in {deathRestartDelay:0.##} seconds.", this);
+        Debug.Log($"Player died on stage {stageDirector.CurrentStageNumber}; showing death screen.", this);
         GameAudio.Instance?.PlayDeath();
         if (inputReader != null)
         {
             inputReader.SetInputEnabled(false);
         }
-        deathRestartRoutine = StartCoroutine(DeathRestart());
+        // Freeze the run where it died so stages cannot complete behind the screen.
+        stageDirector.StopScrolling();
+        deathScreenRoutine = StartCoroutine(ShowDeathScreen());
     }
 
-    private IEnumerator DeathRestart()
+    private IEnumerator ShowDeathScreen()
     {
-        yield return new WaitForSecondsRealtime(deathRestartDelay);
-        deathRestartRoutine = null;
-        Restart();
-        if (inputReader != null)
-        {
-            inputReader.SetInputEnabled(true);
-        }
+        yield return new WaitForSecondsRealtime(deathScreenDelay);
+        deathScreenRoutine = null;
+        deathScreen.Show();
     }
 
     public void Restart()
     {
-        // An external restart (e.g. retry button) supersedes a pending death restart.
-        if (deathRestartRoutine != null)
+        // An external restart (e.g. retry button) supersedes a pending death screen.
+        if (deathScreenRoutine != null)
         {
-            StopCoroutine(deathRestartRoutine);
-            deathRestartRoutine = null;
+            StopCoroutine(deathScreenRoutine);
+            deathScreenRoutine = null;
         }
 
         foreach (var resettable in resettables)
@@ -75,6 +73,10 @@ public class RunController : MonoBehaviour
         }
 
         stageDirector.StartStage(0);
+        if (inputReader != null)
+        {
+            inputReader.SetInputEnabled(true);
+        }
         GameAudio.Instance?.StartRun();
         Debug.Log($"Run restarted. Reset {resettables.Length} objects.", this);
     }
