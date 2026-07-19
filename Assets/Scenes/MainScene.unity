@@ -520,7 +520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 3
-  invulnerabilityDuration: 0.9
+  invulnerabilityDuration: 1
 --- !u!114 &741370389
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -276,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1517245799940041886, guid: cd131d0517e2f4c5a9fe3c1d0356ba2a, type: 3}
       propertyPath: speed
-      value: 3
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 1517245799940041886, guid: cd131d0517e2f4c5a9fe3c1d0356ba2a, type: 3}
       propertyPath: amplitude
@@ -532,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1517245799940041886, guid: cd131d0517e2f4c5a9fe3c1d0356ba2a, type: 3}
       propertyPath: speed
-      value: 2.8
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 1517245799940041886, guid: cd131d0517e2f4c5a9fe3c1d0356ba2a, type: 3}
       propertyPath: amplitude
