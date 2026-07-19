@@ -65,15 +65,15 @@ public class PlayerHealth : MonoBehaviour, IResettable
     public void ApplyMaxHealthModifier(int delta)
     {
         maxHealth = Mathf.Max(1, maxHealth + delta);
-        currentHealth = Mathf.Clamp(currentHealth + delta, 0, maxHealth);
+        // A blood cost reshapes the vessel but cannot kill: a living player's
+        // current health clamps into [1, max] rather than taking the delta as
+        // damage (hard cap "Minimum 1" in the cost tuning table).
+        if (currentHealth > 0)
+        {
+            currentHealth = Mathf.Clamp(currentHealth, 1, maxHealth);
+        }
         Debug.Log($"Max health modified by {delta}. Health: {currentHealth}/{maxHealth}.", this);
         HealthChanged?.Invoke(currentHealth);
-
-        if (currentHealth <= 0)
-        {
-            Debug.Log("Player died from a blood cost.", this);
-            Died?.Invoke();
-        }
     }
 
     public void ResetRun()
