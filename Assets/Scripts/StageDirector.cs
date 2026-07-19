@@ -20,6 +20,8 @@ public class StageDirector : MonoBehaviour, IResettable
 
     public int CurrentStageNumber => currentIndex + 1;
 
+    public Transform CurrentStage => currentIndex >= 0 ? stages[currentIndex] : null;
+
     private Vector3[] basePositions;
     private int currentIndex = -1;
     private bool scrolling;

@@ -9,6 +9,7 @@ public class MovingBlade : MonoBehaviour, IResettable
 
     private Vector3 startingLocalPosition;
     private float elapsed;
+    private float speedMultiplier = 1f;
 
     private void Awake()
     {
@@ -28,16 +29,24 @@ public class MovingBlade : MonoBehaviour, IResettable
         this.phase = phase;
     }
 
+    // Benefit hook (Weary Legs): only safe to change at stage start or reset,
+    // otherwise the sine phase jumps.
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        speedMultiplier = multiplier;
+    }
+
     private void ApplyOscillation(float time)
     {
         var position = startingLocalPosition;
-        position.x += amplitude * Mathf.Sin(speed * time + phase);
+        position.x += amplitude * Mathf.Sin(speed * speedMultiplier * time + phase);
         transform.localPosition = position;
     }
 
     public void ResetRun()
     {
         elapsed = 0f;
+        speedMultiplier = 1f;
         ApplyOscillation(0f);
     }
 }
