@@ -125,6 +125,13 @@ public class StageDirector : MonoBehaviour, IResettable
         scrolling = false;
     }
 
+    // Benefit hook (Clouded Eyes): naturally one-shot, since StartStage
+    // recomputes the speed for every stage.
+    public void ApplyScrollSpeedMultiplier(float multiplier)
+    {
+        currentScrollSpeed *= multiplier;
+    }
+
     public void CompleteCurrentStage()
     {
         if (activeGate != null && !activeGate.HasChosen)

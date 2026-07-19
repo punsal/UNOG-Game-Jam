@@ -7,14 +7,17 @@ public class BenefitApplier : MonoBehaviour, IResettable
 {
     [SerializeField] private StageDirector stageDirector;
     // Relief tuning. Body slows blades; Blood narrows spikes, widening the
-    // safe corridor; Light removes the next stage's first hazard outright.
+    // safe corridor; Light removes the next stage's first hazard outright;
+    // Sight slows the next stage's scroll, buying reading time.
     [SerializeField] private float bladeSlowMultiplier = 0.6f;
     [SerializeField] private float spikeNarrowScale = 0.7f;
+    [SerializeField] private float scrollSlowMultiplier = 0.9f;
 
     private ChoiceGate[] gates;
     private bool pendingHazardRemoval;  // Light
     private bool pendingBladeSlow;      // Body
     private bool pendingCorridorWiden;  // Blood
+    private bool pendingScrollSlow;     // Sight
     // One-shot relief: undone when the next stage starts or the run resets.
     private readonly List<Action> undoActions = new List<Action>();
 
@@ -72,6 +75,9 @@ public class BenefitApplier : MonoBehaviour, IResettable
             case CostType.Blood:
                 pendingCorridorWiden = true;
                 break;
+            case CostType.Sight:
+                pendingScrollSlow = true;
+                break;
             default:
                 return;
         }
@@ -122,6 +128,13 @@ public class BenefitApplier : MonoBehaviour, IResettable
             Debug.Log(blades.Length > 0
                 ? $"Benefit applied (Body): slowed {blades.Length} blade(s) to x{bladeSlowMultiplier:0.##} in stage {index + 1}."
                 : $"Benefit wasted (Body): stage {index + 1} has no blades to slow.", this);
+        }
+
+        if (pendingScrollSlow)
+        {
+            pendingScrollSlow = false;
+            stageDirector.ApplyScrollSpeedMultiplier(scrollSlowMultiplier);
+            Debug.Log($"Benefit applied (Sight): stage {index + 1} scrolls at x{scrollSlowMultiplier:0.##}.", this);
         }
 
         if (pendingCorridorWiden)
@@ -184,5 +197,6 @@ public class BenefitApplier : MonoBehaviour, IResettable
         pendingHazardRemoval = false;
         pendingBladeSlow = false;
         pendingCorridorWiden = false;
+        pendingScrollSlow = false;
     }
 }

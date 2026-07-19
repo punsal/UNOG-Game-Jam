@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CostData
   icon: {fileID: 21300000, guid: 6d1edc352d92d4fc0894ce158bfbf0af, type: 3}
   offerName: Clouded Eyes
-  benefitCopy: Reveals the safe lane earlier
+  benefitCopy: The world slows; hazards approach more gently next stage
   costCopy: -20% Vision
   costType: 2
   value: -0.2
