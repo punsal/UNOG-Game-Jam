@@ -7,6 +7,16 @@ public class DecisionCard : MonoBehaviour
     [SerializeField] private SpriteRenderer iconRenderer;
     [SerializeField] private TextMeshPro copyText;
 
+    private void Awake()
+    {
+        // Altars show only their icon in the world; the offer's full benefit
+        // and cost text lives in the confirmation popup.
+        if (copyText != null)
+        {
+            copyText.gameObject.SetActive(false);
+        }
+    }
+
     public void SetOffer(CostData offer)
     {
         if (offer == null)
@@ -17,6 +27,5 @@ public class DecisionCard : MonoBehaviour
 
         gameObject.SetActive(true);
         iconRenderer.sprite = offer.Icon;
-        copyText.text = offer.CostCopy;
     }
 }

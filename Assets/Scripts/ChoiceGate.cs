@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-/// <summary>Accepts one altar choice and disables the remaining choice.</summary>
+/// <summary>Turns altar entries into pending offers and commits one accepted choice.</summary>
 public class ChoiceGate : MonoBehaviour, IResettable
 {
     [SerializeField] private AltarTrigger altarA;
@@ -10,12 +10,15 @@ public class ChoiceGate : MonoBehaviour, IResettable
     public event Action<CostData> CostChosen;
     // Presentation-only: which altar was committed to (fires alongside CostChosen).
     public event Action<AltarTrigger> AltarChosen;
+    // An altar was entered and awaits confirmation (the popup subscribes).
+    public event Action<ChoiceGate, AltarTrigger> AltarEntered;
 
     public AltarTrigger AltarA => altarA;
     public AltarTrigger AltarB => altarB;
     public bool HasChosen => hasChosen;
 
     private bool hasChosen;
+    private AltarTrigger pendingAltar;
 
     private void OnEnable()
     {
@@ -37,13 +40,45 @@ public class ChoiceGate : MonoBehaviour, IResettable
             return;
         }
 
+        if (pendingAltar != null)
+        {
+            return;
+        }
+
+        pendingAltar = altar;
+        Debug.Log($"Offer opened at '{altar.name}': {DescribeOffer(altar.Offer)}.", this);
+        GameAudio.Instance?.PlayAltarApproach();
+        AltarEntered?.Invoke(this, altar);
+    }
+
+    /// <summary>Commits the pending offer as this gate's one choice.</summary>
+    public void Accept()
+    {
+        if (hasChosen || pendingAltar == null)
+        {
+            return;
+        }
+
+        var altar = pendingAltar;
+        pendingAltar = null;
         hasChosen = true;
         AltarTrigger rejected = altar == altarA ? altarB : altarA;
         Debug.Log($"Choice made at '{altar.name}': {DescribeOffer(altar.Offer)}. Rejected '{rejected.name}': {DescribeOffer(rejected.Offer)}.", this);
         SetAltarsInteractable(false);
-        GameAudio.Instance?.PlayAltarApproach();
         CostChosen?.Invoke(altar.Offer);
         AltarChosen?.Invoke(altar);
+    }
+
+    /// <summary>Dismisses the pending offer; both altars stay armed.</summary>
+    public void Decline()
+    {
+        if (pendingAltar == null)
+        {
+            return;
+        }
+
+        Debug.Log($"Offer declined at '{pendingAltar.name}'.", this);
+        pendingAltar = null;
     }
 
     private static string DescribeOffer(CostData offer)
@@ -64,6 +99,7 @@ public class ChoiceGate : MonoBehaviour, IResettable
             Debug.Log("Choice gate re-armed for the new run.", this);
         }
         hasChosen = false;
+        pendingAltar = null;
         SetAltarsInteractable(true);
     }
 }
