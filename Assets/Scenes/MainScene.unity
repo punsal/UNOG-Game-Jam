@@ -388,6 +388,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2791326168832444415, guid: 39db4be940e35414682026e3b5197c4c, type: 3}
+      propertyPath: recipient
+      value: 
+      objectReference: {fileID: 986421848}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -524,7 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 3
   invulnerabilityDuration: 1
-  godMode: 0
+  godMode: 1
 --- !u!114 &741370389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,6 +702,11 @@ PrefabInstance:
 --- !u!4 &986421847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2758001694186749351, guid: ffb681f25ad0f45deb011040e6459ce3, type: 3}
+  m_PrefabInstance: {fileID: 986421846}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &986421848 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8100959917698019136, guid: ffb681f25ad0f45deb011040e6459ce3, type: 3}
   m_PrefabInstance: {fileID: 986421846}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1170120481

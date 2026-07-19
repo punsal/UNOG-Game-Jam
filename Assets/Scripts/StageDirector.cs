@@ -141,14 +141,16 @@ public class StageDirector : MonoBehaviour, IResettable
 
         Debug.Log($"Stage {currentIndex + 1}/{stages.Length} completed in {Time.time - stageStartTime:0.#}s.", this);
         scrolling = false;
-        stages[currentIndex].gameObject.SetActive(false);
 
         if (currentIndex >= stages.Length - 1)
         {
+            // The final stage stays visible for the light delivery at the
+            // shrine; ResetRun hides it with everything else.
             endingResolver.Resolve(relicLight.CurrentLight);
         }
         else
         {
+            stages[currentIndex].gameObject.SetActive(false);
             StartStage(currentIndex + 1);
         }
     }
