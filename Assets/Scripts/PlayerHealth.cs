@@ -11,6 +11,9 @@ public class PlayerHealth : MonoBehaviour, IResettable
 
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float invulnerabilityDuration = 0.9f;
+    // Recording aid: hazards cannot damage the player; altars work normally.
+    // Deliberately sticky across ResetRun so a recording can span restarts.
+    [SerializeField] private bool godMode;
 
     private int baselineMaxHealth;
     private int currentHealth;
@@ -19,6 +22,13 @@ public class PlayerHealth : MonoBehaviour, IResettable
     public int CurrentHealth => currentHealth;
     public int MaxHealth => maxHealth;
     public bool IsInvulnerable => invulnerabilityTimer > 0f;
+    public bool GodMode => godMode;
+
+    public void SetGodMode(bool enabled)
+    {
+        godMode = enabled;
+        Debug.Log($"God mode {(enabled ? "enabled" : "disabled")}.", this);
+    }
 
     private void Awake()
     {
@@ -41,7 +51,7 @@ public class PlayerHealth : MonoBehaviour, IResettable
 
     public void ApplyDamage(int amount, Vector2 sourceWorldPosition)
     {
-        if (amount <= 0 || IsInvulnerable || currentHealth <= 0)
+        if (godMode || amount <= 0 || IsInvulnerable || currentHealth <= 0)
         {
             return;
         }

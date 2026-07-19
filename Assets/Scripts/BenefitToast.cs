@@ -33,6 +33,12 @@ public class BenefitToast : MonoBehaviour, IResettable
         }
     }
 
+    /// <summary>General-purpose brief HUD message (also used by dev toggles).</summary>
+    public void ShowMessage(string message)
+    {
+        Show(message);
+    }
+
     private void Show(string message)
     {
         toastText.text = message;

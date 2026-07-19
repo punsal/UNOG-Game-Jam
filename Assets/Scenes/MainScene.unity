@@ -410,6 +410,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1599713522527574895, guid: 39db4be940e35414682026e3b5197c4c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 741370385}
+    - targetCorrespondingSourceObject: {fileID: 1599713522527574895, guid: 39db4be940e35414682026e3b5197c4c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 741370391}
   m_SourcePrefab: {fileID: 100100000, guid: 39db4be940e35414682026e3b5197c4c, type: 3}
 --- !u!1 &741370383 stripped
 GameObject:
@@ -521,6 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 3
   invulnerabilityDuration: 1
+  godMode: 0
 --- !u!114 &741370389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,6 +553,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputReader
   dragSensitivity: 2.2
+--- !u!114 &741370391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741370383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac42a4a5e2a6440fb9be487e309d27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GodModeToggle
+  playerHealth: {fileID: 741370388}
+  toast: {fileID: 1364661318}
+  tapsRequired: 5
+  windowSeconds: 2
 --- !u!1001 &950064186
 PrefabInstance:
   m_ObjectHideFlags: 0
