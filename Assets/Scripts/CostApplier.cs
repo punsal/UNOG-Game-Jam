@@ -42,6 +42,7 @@ public class CostApplier : MonoBehaviour, IResettable
         // Null offer = the risk altar: everything is kept, no cost to pay.
         if (cost == null)
         {
+            Debug.Log("Risk accepted: no cost paid, all resources kept.", this);
             return;
         }
         Apply(cost);
@@ -78,7 +79,12 @@ public class CostApplier : MonoBehaviour, IResettable
         }
 
         runState.RecordChoice(cost);
-        Debug.Log($"Applied {cost.CostType} cost ({cost.Value}).", this);
+        Debug.Log($"Applied {cost.CostType} cost ({cost.Value}). Run state: health {playerHealth.CurrentHealth}/{playerHealth.MaxHealth}, light {relicLight.CurrentLight:0.#}, speed x{runState.Modifiers.SpeedMultiplier:0.##}, sight x{runState.Modifiers.SightMultiplier:0.##}, scale x{runState.Modifiers.BodyScaleMultiplier:0.##}, choices {runState.ChosenCosts.Count}.", this);
+
+        if (!ValidateCaps())
+        {
+            Debug.LogWarning("A modifier cap invariant is violated after applying this cost.", this);
+        }
     }
 
     private void ApplyBodyCost(float value)

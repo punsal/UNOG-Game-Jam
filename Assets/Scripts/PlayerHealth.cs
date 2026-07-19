@@ -66,10 +66,12 @@ public class PlayerHealth : MonoBehaviour, IResettable
     {
         maxHealth = Mathf.Max(1, maxHealth + delta);
         currentHealth = Mathf.Clamp(currentHealth + delta, 0, maxHealth);
+        Debug.Log($"Max health modified by {delta}. Health: {currentHealth}/{maxHealth}.", this);
         HealthChanged?.Invoke(currentHealth);
 
         if (currentHealth <= 0)
         {
+            Debug.Log("Player died from a blood cost.", this);
             Died?.Invoke();
         }
     }

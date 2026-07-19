@@ -32,15 +32,22 @@ public class ChoiceGate : MonoBehaviour, IResettable
     {
         if (hasChosen)
         {
+            Debug.Log($"Ignored entry at '{altar.name}': this gate already committed a choice.", this);
             return;
         }
 
         hasChosen = true;
-        Debug.Log($"Choice made at '{altar.name}': {(altar.Offer != null ? altar.Offer.OfferName : "Risk")}", this);
+        AltarTrigger rejected = altar == altarA ? altarB : altarA;
+        Debug.Log($"Choice made at '{altar.name}': {DescribeOffer(altar.Offer)}. Rejected '{rejected.name}': {DescribeOffer(rejected.Offer)}.", this);
         SetAltarsInteractable(false);
         GameAudio.Instance?.PlayAltarApproach();
         CostChosen?.Invoke(altar.Offer);
         AltarChosen?.Invoke(altar);
+    }
+
+    private static string DescribeOffer(CostData offer)
+    {
+        return offer != null ? $"{offer.OfferName} ({offer.CostType} {offer.Value})" : "Risk (no cost)";
     }
 
     private void SetAltarsInteractable(bool interactable)
@@ -51,6 +58,10 @@ public class ChoiceGate : MonoBehaviour, IResettable
 
     public void ResetRun()
     {
+        if (hasChosen)
+        {
+            Debug.Log("Choice gate re-armed for the new run.", this);
+        }
         hasChosen = false;
         SetAltarsInteractable(true);
     }

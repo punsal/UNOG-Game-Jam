@@ -31,6 +31,7 @@ public class AltarTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log($"Player entered altar '{name}' offering {(offer != null ? offer.OfferName : "Risk")}.", this);
             PlayerEntered?.Invoke(this);
         }
     }

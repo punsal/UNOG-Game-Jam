@@ -40,7 +40,7 @@ public class RunController : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Restarting after death in {deathRestartDelay:0.##} seconds.", this);
+        Debug.Log($"Player died on stage {stageDirector.CurrentStageNumber}; restarting in {deathRestartDelay:0.##} seconds.", this);
         GameAudio.Instance?.PlayDeath();
         if (inputReader != null)
         {
