@@ -16,7 +16,7 @@
 - Permanent costs use bounded modifiers.
 - MVP hazards are spike wall and moving blade.
 - Two endings are required; a third is conditional.
-- Android is the default build unless jam rules require WebGL.
+- Android APK is the submission platform (jam rules confirmed 2026-07-19; no WebGL requirement).
 - Feature freeze begins at Hour 38.
 
 ## Approved Technical Baseline

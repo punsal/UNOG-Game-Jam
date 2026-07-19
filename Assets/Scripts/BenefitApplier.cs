@@ -5,6 +5,9 @@ using UnityEngine;
 /// <summary>Applies each accepted sacrifice's relief to the next stage.</summary>
 public class BenefitApplier : MonoBehaviour, IResettable
 {
+    // Fired with a player-facing message when an accepted relief lands.
+    public event Action<string> BenefitApplied;
+
     [SerializeField] private StageDirector stageDirector;
     // Relief tuning. Body slows blades; Blood narrows spikes, widening the
     // safe corridor; Light removes the next stage's first hazard outright;
@@ -108,6 +111,7 @@ public class BenefitApplier : MonoBehaviour, IResettable
                 target.gameObject.SetActive(false);
                 undoActions.Add(() => target.gameObject.SetActive(true));
                 Debug.Log($"Benefit applied (Light): removed hazard '{target.name}' from stage {index + 1}.", this);
+                BenefitApplied?.Invoke("The light consumes a hazard ahead");
             }
             else
             {
@@ -128,6 +132,7 @@ public class BenefitApplier : MonoBehaviour, IResettable
             Debug.Log(blades.Length > 0
                 ? $"Benefit applied (Body): slowed {blades.Length} blade(s) to x{bladeSlowMultiplier:0.##} in stage {index + 1}."
                 : $"Benefit wasted (Body): stage {index + 1} has no blades to slow.", this);
+            if (blades.Length > 0) BenefitApplied?.Invoke("Weary legs slow the blades");
         }
 
         if (pendingScrollSlow)
@@ -135,6 +140,7 @@ public class BenefitApplier : MonoBehaviour, IResettable
             pendingScrollSlow = false;
             stageDirector.ApplyScrollSpeedMultiplier(scrollSlowMultiplier);
             Debug.Log($"Benefit applied (Sight): stage {index + 1} scrolls at x{scrollSlowMultiplier:0.##}.", this);
+            BenefitApplied?.Invoke("The world slows around you");
         }
 
         if (pendingCorridorWiden)
@@ -156,6 +162,7 @@ public class BenefitApplier : MonoBehaviour, IResettable
             Debug.Log(narrowed > 0
                 ? $"Benefit applied (Blood): narrowed {narrowed} spike(s) to x{spikeNarrowScale:0.##} width in stage {index + 1}."
                 : $"Benefit wasted (Blood): stage {index + 1} has no spikes to narrow.", this);
+            if (narrowed > 0) BenefitApplied?.Invoke("The blood tithe narrows the spikes");
         }
     }
 
