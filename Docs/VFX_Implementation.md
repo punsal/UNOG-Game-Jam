@@ -1,5 +1,15 @@
 # Last Light — VFX Implementation
 
+> **2026-07-19 update.** Written during the VFX pass; the flow has since
+> changed in ways that affect some statements below: altar entry now opens a
+> confirmation popup (commit happens on Accept, so `ChoiceGate` events fire
+> from `Accept()`, not on trigger entry); the risk-altar pink instability
+> blink is gated on an actually-null offer (no risk altars exist in content,
+> so it is dormant); `FinalLightTransferVFX.recipient` now targets the
+> hearth-shrine at the top of stage 6, the final stage stays visible at run
+> end, and the outcome panel waits 2.4 s so the transfer is visible. The
+> per-system architecture and pools below are otherwise still accurate.
+
 Status: complete pass, **live Play-Mode validated** (2026-07-19) on branch
 `feature/complete-vfx-pass`. The sacrifice gameplay flow is now wired and
 verified end-to-end. Motto enforced throughout: **"Every gain flashes briefly.

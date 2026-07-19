@@ -1,25 +1,32 @@
-# Last Light - PM Package v2
+# Last Light — Docs
 
-This package is the execution baseline for the 48-hour jam.
+Living documents first; process history is preserved under `archive/`.
 
-## Start Here
+## Live
 
-1. Read `DECISIONS.md`.
-2. Read the Working Agreement at the top of `TASKS.md`.
-3. Execute tasks in dependency order.
-4. Use the approved development spreadsheet for implementation details.
-5. Use the approved art spreadsheet for asset details.
-6. Keep G1-G3 completely playable with placeholders.
-7. Do not add scope.
+- `DECISIONS.md` — locked product/technical decisions, kept current as they
+  change (each superseded decision is annotated, not erased). Read first.
+- `Fairness_Matrix.md` — the stage-layout fairness model, its invariants,
+  and the latest verification results. Re-run before shipping any layout,
+  hazard, geometry, or pacing change.
+- `Audio_Setup.md` — audio event map (which code calls which GameAudio hook).
+- `VFX_Implementation.md` — VFX systems, their hooks, and validation notes.
 
-## Files
+## Reference (authoritative planning sources)
 
-- `Last_Light_Project_Plan_v2.pdf` - concise PM plan and governance.
-- `TASKS.md` - executable task list and working agreement.
-- `ROADMAP.md` - gate plan and timeboxes.
-- `DECISIONS.md` - locked product, technical, and art decisions.
-- `README.md` - package usage.
-- `Last_Light_Production_Board_v2.xlsx` - importable production workbook.
+- `Last Light — Architecture and 48h Plan.xlsx` — component/class table,
+  per-stage design intent, cost tuning values.
+- `Last Light — AI Art Prompt & Asset Production Plan.xlsx` — art asset
+  register, prompts, fallbacks.
+- `Last_Light_Game_Design_Document_EN.pdf` — game design document.
+- `Last_Light_Technical_Art_Baseline.pdf` — art/technical baseline.
+
+## Archive
+
+`archive/` holds the completed jam process: the task list and roadmap
+(all gates passed), the PM plans and production board, and the two device
+test reports (G3 pass and the pacing-build pass — both describe earlier
+states of the game and are kept as history, not as current truth).
 
 ## Source Links
 
