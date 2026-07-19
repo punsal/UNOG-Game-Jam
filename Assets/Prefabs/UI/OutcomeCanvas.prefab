@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The End.
+  m_text: The Light Endures
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7c7027780315b428b85470e395409c9a, type: 2}
   m_sharedMaterial: {fileID: 7100932421596798404, guid: 7c7027780315b428b85470e395409c9a, type: 2}
@@ -291,7 +291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8770408173091931110
 RectTransform:
   m_ObjectHideFlags: 0
@@ -591,5 +591,6 @@ MonoBehaviour:
   panelRoot: {fileID: 5282459741984595376}
   endingText: {fileID: 9001005159995234302}
   retryButton: {fileID: 829867551712911667}
+  retryButtonText: {fileID: 8189396377441875337}
   endingResolver: {fileID: 0}
   runController: {fileID: 0}

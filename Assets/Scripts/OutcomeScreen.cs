@@ -8,6 +8,7 @@ public class OutcomeScreen : MonoBehaviour, IResettable
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private TextMeshProUGUI endingText;
     [SerializeField] private Button retryButton;
+    [SerializeField] private TextMeshProUGUI retryButtonText;
     [SerializeField] private EndingResolver endingResolver;
     [SerializeField] private RunController runController;
 
@@ -36,6 +37,10 @@ public class OutcomeScreen : MonoBehaviour, IResettable
     {
         Debug.Log($"Showing {ending} outcome screen.", this);
         endingText.text = ending == EndingType.Dark ? "Consumed by Darkness" : "The Light Endures";
+        if (retryButtonText != null)
+        {
+            retryButtonText.text = ending == EndingType.Dark ? "Villain" : "Hero";
+        }
         panelRoot.SetActive(true);
     }
 
