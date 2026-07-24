@@ -51,7 +51,7 @@ public class SacrificeTransferVFX : MonoBehaviour, IResettable
     private void Start()
     {
         // One-time scene lookup; gates live inside inactive stage chunks.
-        gates = FindObjectsByType<ChoiceGate>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        gates = FindObjectsByType<ChoiceGate>(FindObjectsInactive.Include);
         for (int i = 0; i < gates.Length; i++)
         {
             gates[i].AltarChosen += HandleAltarChosen;

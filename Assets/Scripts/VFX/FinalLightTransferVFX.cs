@@ -49,7 +49,7 @@ public class FinalLightTransferVFX : MonoBehaviour, IResettable
         {
             relicLight = GetComponentInParent<RelicLight>();
         }
-        endingResolver = FindFirstObjectByType<EndingResolver>(FindObjectsInactive.Include);
+        endingResolver = FindAnyObjectByType<EndingResolver>(FindObjectsInactive.Include);
         if (endingResolver != null)
         {
             endingResolver.RunEnded += HandleRunEnded;

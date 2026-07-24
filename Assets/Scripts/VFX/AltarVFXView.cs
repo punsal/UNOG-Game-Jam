@@ -65,7 +65,7 @@ public class AltarVFXView : MonoBehaviour, IResettable
         }
 
         // Find the gate that owns this altar (one-time scene search).
-        var gates = FindObjectsByType<ChoiceGate>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        var gates = FindObjectsByType<ChoiceGate>(FindObjectsInactive.Include);
         for (int i = 0; i < gates.Length; i++)
         {
             if (gates[i].AltarA == altarTrigger || gates[i].AltarB == altarTrigger)

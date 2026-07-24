@@ -18,13 +18,13 @@ public class WorldDegradationVFX : MonoBehaviour, IResettable
 
     private void Start()
     {
-        stageDirector = FindFirstObjectByType<StageDirector>(FindObjectsInactive.Include);
+        stageDirector = FindAnyObjectByType<StageDirector>(FindObjectsInactive.Include);
         if (stageDirector != null)
         {
             stageDirector.StageChanged += HandleStageChanged;
         }
 
-        gates = FindObjectsByType<ChoiceGate>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        gates = FindObjectsByType<ChoiceGate>(FindObjectsInactive.Include);
         for (int i = 0; i < gates.Length; i++)
         {
             gates[i].AltarChosen += HandleAltarChosen;

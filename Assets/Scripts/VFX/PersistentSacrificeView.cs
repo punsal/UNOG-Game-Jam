@@ -122,7 +122,7 @@ public class PersistentSacrificeView : MonoBehaviour, IResettable
 
         if (!vignetteSearched)
         {
-            vignette = FindFirstObjectByType<PixelVignetteView>(FindObjectsInactive.Include);
+            vignette = FindAnyObjectByType<PixelVignetteView>(FindObjectsInactive.Include);
             vignetteSearched = true;
         }
         if (vignette != null)

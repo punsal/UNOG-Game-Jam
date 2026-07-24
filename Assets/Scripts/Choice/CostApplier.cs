@@ -15,7 +15,7 @@ public class CostApplier : MonoBehaviour, IResettable
     private void Start()
     {
         // Gates live inside inactive stage chunks; subscribe once for the scene's lifetime.
-        gates = FindObjectsByType<ChoiceGate>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        gates = FindObjectsByType<ChoiceGate>(FindObjectsInactive.Include);
         for (int i = 0; i < gates.Length; i++)
         {
             gates[i].CostChosen += HandleCostChosen;

@@ -28,7 +28,7 @@ public class ChoicePopup : MonoBehaviour, IResettable
     private void Start()
     {
         // Gates live inside inactive stage chunks; subscribe once for the scene's lifetime.
-        gates = FindObjectsByType<ChoiceGate>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        gates = FindObjectsByType<ChoiceGate>(FindObjectsInactive.Include);
         foreach (var gate in gates)
         {
             gate.AltarEntered += HandleAltarEntered;
